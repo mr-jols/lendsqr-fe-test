@@ -1,0 +1,89 @@
+@use "../config/" as *;
+@use "sass:color";
+
+input {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid color.change($on-primary-color, $alpha: 0.15);
+  border-radius: to-rem(5);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  font: $font-family--Avenir;
+
+  &[type="password"] {
+    padding-right: 4rem;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: rgba(57, 205, 204, 0.25) 0px 0px 0px 0.2rem;
+    border: 2px solid rgb(159, 231, 230);
+  }
+
+  &::placeholder {
+    font-family: $font-family--Avenir;
+  }
+}
+
+label {
+  display: block;
+  margin-bottom: to-rem(6);
+}
+
+.input-error {
+  color: $accent-one-color;
+  font-size: 0.7rem;
+}
+
+.relative-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.visibility-toggler {
+  position: absolute;
+  margin-right: 1rem;
+  font-size: to-rem(12);
+  color: $secondary-color;
+  cursor: default;
+}
+
+.forgot-password {
+  text-transform: uppercase;
+  font-size: to-rem(12);
+  font-weight: bold;
+  letter-spacing: to-rem(1.2);
+  color: $secondary-color;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: default;
+  }
+}
+
+.submit-button {
+  border-radius: to-rem(8);
+  width: 100%;
+  padding: to-rem(16) 0;
+  display: block;
+  background-color: $neutral-color;
+  font-weight: bold;
+  letter-spacing: to-rem(1.4);
+  transition: all 0.15s;
+
+  &--green {
+    border: none;
+    background-color: $secondary-color;
+    color: $neutral-color;
+
+    &:focus {
+      box-shadow: rgba(53, 180, 180, 0.5) 0px 0px 0px 0.2rem;
+    }
+
+    &:hover {
+      background-color: rgb(45, 179, 178);
+      border-color: rgb(43, 168, 168);
+    }
+  }
+}

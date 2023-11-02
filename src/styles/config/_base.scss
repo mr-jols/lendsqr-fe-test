@@ -1,0 +1,45 @@
+@use "breakpoints" as *;
+@use "colors" as *;
+
+html {
+  font-size: 12px;
+
+  @include breakpoint-tab-small {
+    font-size: 14px;
+  }
+
+  @include breakpoint-desktop {
+    font-size: 1.67vw;
+  }
+}
+
+* {
+  color: $primary-color;
+}
+
+
+.center-container{
+    max-width: 500px;
+    height: 100vh;
+    display: flex;
+    margin-inline: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.giveborder{
+    border:1px solid red;
+}
+
+
+.absolute{
+    position:absolute;
+}
+
+.hidden{
+    visibility: hidden;
+}
+
+.inline{
+    display: inline;
+}
