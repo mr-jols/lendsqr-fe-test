@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Work_Sans } from "next/font/google";
+import '@mantine/core/styles.css';
 import "@/styles/main.scss";
 import { MantineProvider } from "@mantine/core";
-import '@mantine/core/styles.css';
+
 
 const workSans = Work_Sans({
   weight: ["400", "600"],

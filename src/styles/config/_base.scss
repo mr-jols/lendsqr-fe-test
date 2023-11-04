@@ -1,45 +1,53 @@
 @use "breakpoints" as *;
 @use "colors" as *;
+@use "mixins" as *;
+@use "functions" as *;
 
 html {
-  font-size: 12px;
-
-  @include breakpoint-tab-small {
-    font-size: 14px;
-  }
+  font-size: 14px;
 
   @include breakpoint-desktop {
-    font-size: 1.67vw;
+    font-size: 1vw;
   }
 }
 
 * {
   color: $primary-color;
+  margin: 0;
+  padding: 0;
 }
 
-
-.center-container{
-    max-width: 500px;
-    height: 100vh;
-    display: flex;
-    margin-inline: auto;
-    justify-content: center;
-    align-items: center;
+.center-container {
+  max-width: 500px;
+  height: 100vh;
+  display: flex;
+  margin-inline: auto;
+  justify-content: center;
+  align-items: center;
 }
 
-.giveborder{
-    border:1px solid red;
+.giveborder {
+  border: 1px solid red;
 }
 
-
-.absolute{
-    position:absolute;
+.absolute {
+  position: absolute;
 }
 
-.hidden{
-    visibility: hidden;
+.hidden {
+  visibility: hidden;
 }
 
-.inline{
-    display: inline;
+.inline {
+  display: inline;
+}
+
+.logo-icon-wrapper {
+  width: to-rem(173.765);
+
+  & img {
+    width: 100%;
+    object-fit: contain;
+    height: 100%;
+  }
 }

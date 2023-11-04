@@ -4,10 +4,15 @@
 input {
   width: 100%;
   padding: 1rem;
+  background-color: $neutral-color;
   border: 2px solid color.change($on-primary-color, $alpha: 0.15);
   border-radius: to-rem(5);
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  font: $font-family--Avenir;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+
+  & *{
+    font-family: $font-family--Avenir;
+  }
 
   &[type="password"] {
     padding-right: 4rem;
@@ -20,7 +25,7 @@ input {
   }
 
   &::placeholder {
-    font-family: $font-family--Avenir;
+    color: color.change($on-primary-color,$alpha:0.6);
   }
 }
 
@@ -32,6 +37,7 @@ label {
 .input-error {
   color: $accent-one-color;
   font-size: 0.7rem;
+  margin-top: 0.5rem;
 }
 
 .relative-wrapper {
@@ -47,12 +53,15 @@ label {
   font-size: to-rem(12);
   color: $secondary-color;
   cursor: default;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .forgot-password {
   text-transform: uppercase;
   font-size: to-rem(12);
   font-weight: bold;
+  margin-top: to-rem(24);
   letter-spacing: to-rem(1.2);
   color: $secondary-color;
 

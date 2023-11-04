@@ -1,5 +1,5 @@
-"use client"
-import { useState } from "react";
+"use client";
+import { useEffect, useState } from "react";
 
 export enum FormElementType {
   email,
@@ -94,10 +94,24 @@ export function initialFormState(length: number): FormStateProps {
   };
 }
 
-export default function useForm(init: FormElementConfigProps[]) {
+interface FormHookOutputProps {
+  state: FormStateProps;
+  dispatch: {
+    handleValueChange(update: UpdateValuesProps): void;
+    handleIsDirtyChange(update: UpdateIsDirtyProps): void;
+    handleButtonStateChange(update: SubmitButtonStateProps): void;
+    handleValidateFormElement(element: FormElementConfigProps): void;
+    handleValidateFormElements(elements: FormElementConfigProps[]): void;
+  };
+}
+
+export default function useForm(
+  init: FormElementConfigProps[]
+): FormHookOutputProps {
   const [formState, setFormState] = useState<FormStateProps>(
     initialFormState(init.length)
   );
+
 
   function handleValueChange(update: UpdateValuesProps) {
     setFormState(updateValue(formState, update));
@@ -114,8 +128,26 @@ export default function useForm(init: FormElementConfigProps[]) {
   function handleButtonStateChange(update: SubmitButtonStateProps) {
     setFormState(updateSubmitButtonState(formState, update));
   }
-}
 
+  function handleValidateFormElement(element: FormElementConfigProps) {
+    setFormState(validateFormElement(formState, element));
+  }
+
+  function handleValidateFormElements(elements: FormElementConfigProps[]) {
+    setFormState(validateFormElements(formState, elements));
+  }
+
+  return {
+    state: formState,
+    dispatch: {
+      handleValueChange,
+      handleIsDirtyChange,
+      handleButtonStateChange,
+      handleValidateFormElement,
+      handleValidateFormElements,
+    },
+  };
+}
 
 export function validateFormElement(
   currentState: FormStateProps,
@@ -153,19 +185,18 @@ export function validateFormElement(
 }
 
 export function validateFormElements(
-    currentState: FormStateProps,
-    elements: FormElementConfigProps[]
-  ): FormStateProps {
-    return {
-      ...currentState,
-      errors: currentState.errors.map(
-        (item, index) =>
-          validateFormElement(currentState, elements[index]).errors[index]
-      ),
-    };
-  }
+  currentState: FormStateProps,
+  elements: FormElementConfigProps[]
+): FormStateProps {
+  return {
+    ...currentState,
+    errors: currentState.errors.map(
+      (item, index) =>
+        validateFormElement(currentState, elements[index]).errors[index]
+    ),
+  };
+}
 
-  
 export function validateEmail(
   value: string,
   errorMessages: [string, string]

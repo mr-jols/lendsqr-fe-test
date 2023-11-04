@@ -3,15 +3,16 @@ import useToggle from "@/hooks/useToggle";
 import { InputFieldProps } from ".";
 import ErrorBuilder from "./error";
 
+
 export function PasswordInputFieldBuilder({
   props,
 }: {
-  props: InputFieldProps;
+  props: Omit<InputFieldProps,"type">;
 }) {
   const [toggle, handleToggle] = useToggle();
 
   return (
-    <>
+    <div>
       {props.label && <label>{props.label}</label>}
       <div className="relative-wrapper">
         <span className="visibility-toggler" onClick={(_) => handleToggle()}>
@@ -20,11 +21,13 @@ export function PasswordInputFieldBuilder({
         <input
           type={toggle ? "text" : "password"}
           placeholder={props.placeholder}
-          value={props.value}
+          value={props?.value ?? ""}
+          onChange={(e) => props.onChange(e.target.value)}
+          onBlur={(_)=>props.onBlur?.call({})}
         ></input>
       </div>
       <ErrorBuilder props={props.errorMessage} />
-      <span className="forgot-password">Forgot Password</span>
-    </>
+      <p className="forgot-password">Forgot Password</p>
+    </div>
   );
 }
