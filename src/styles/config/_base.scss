@@ -12,9 +12,18 @@ html {
 }
 
 * {
-  color: $primary-color;
+  color: $on-primary-color;
   margin: 0;
   padding: 0;
+  box-sizing: border-box !important;
+}
+a{
+    text-decoration: none;
+}
+
+button{
+    border:none;
+    background: $neutral-color;
 }
 
 .center-container {
@@ -24,6 +33,14 @@ html {
   margin-inline: auto;
   justify-content: center;
   align-items: center;
+}
+
+.side-container{
+width: to-rem(300);
+}
+
+.center-container > * {
+  width: 100%;
 }
 
 .giveborder {
@@ -45,9 +62,19 @@ html {
 .logo-icon-wrapper {
   width: to-rem(173.765);
 
+  &--smaller {
+    width: to-rem(144);
+  }
+
   & img {
     width: 100%;
     object-fit: contain;
     height: 100%;
   }
+}
+
+img {
+  width: 100%;
+  object-fit: contain;
+  height: 100%;
 }

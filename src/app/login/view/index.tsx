@@ -5,7 +5,6 @@ import { PasswordInputFieldBuilder } from "@/components/input/password";
 import useForm, {
   FormElementConfigProps,
   FormElementType,
-  validateFormElements,
 } from "@/hooks/useForm";
 import Images from "@/utils/images";
 import Image from "next/image";
