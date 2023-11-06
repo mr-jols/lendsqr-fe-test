@@ -1,15 +1,21 @@
 @use "../config" as *;
 
 .dashboard {
+    height: 100vh;
+    overflow: hidden;
+
   &-content-wrapper {
     display: flex;
+    background-color: $neutral-two-color;
+    min-height: 100vh;
 
     & .nav-wrapper {
       display: none;
+      background-color: $neutral-color;
 
       @include breakpoint-tab {
         display: block;
-        width: to-rem(300);
+        width: to-rem(284);
         max-height: 100vh;
         overflow-y: scroll;
         box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.04);
@@ -22,9 +28,23 @@
 
     & main {
       flex: 1;
-      background-color: $neutral-two-color;
       overflow-y: scroll;
       max-height: 100vh;
+      padding-inline: to-rem(20);
+      padding-top: to-rem(110);
+
+      &::-webkit-scrollbar {
+        width: 0px;
+      }
+
+      @include breakpoint-tab-small {
+        padding-top: to-rem(140);
+        padding-inline: to-rem(60);
+      }
+
+      @include breakpoint-tab {
+        padding-top: to-rem(160);
+      }
     }
   }
 }

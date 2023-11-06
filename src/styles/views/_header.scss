@@ -11,12 +11,25 @@
   box-shadow: 3px 0px 20px 0px rgba(0, 0, 0, 0.04);
   padding: to-rem(20);
 
+
+
+  .left-section{
+    display: flex;
+    width: 65%;
+    justify-content: space-between;
+
+
+    @include breakpoint-laptop{
+        width: 52%;
+    }
+  }
+
   @include breakpoint-tab-small {
     padding: to-rem(30) to-rem(60) to-rem(30) to-rem(30);
   }
 
   & .search-input {
-    min-width: to-rem(480);
+    min-width: to-rem(450);
     display: none;
 
     @include breakpoint-tab {

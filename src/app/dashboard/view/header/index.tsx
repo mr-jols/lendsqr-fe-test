@@ -18,8 +18,11 @@ export default function Header() {
 
   return (
     <header className="header">
-      <Logo />
-      <SearchInputFieldBuilder />
+      <div className="left-section">
+        <Logo />
+        <SearchInputFieldBuilder />
+      </div>
+      <div>
       <HeaderItems />
       <HamburgerMenu
         props={{
@@ -39,6 +42,7 @@ export default function Header() {
       >
         <Nav />
       </Drawer>
+      </div>
     </header>
   );
 }

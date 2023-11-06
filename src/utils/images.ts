@@ -30,6 +30,10 @@ import system_messages from "public/images/sidenav/system_messages.svg";
 import logout from "public/images/sidenav/logout.svg";
 import dashboard from "public/images/sidenav/dashboard.svg";
 import nav_dropdown from "public/images/sidenav/dropdown.svg";
+import active_users from "public/images/dashboard/active_users.svg";
+import users_with_loan from "public/images/dashboard/users_with_loan.svg";
+import users_with_savings from "public/images/dashboard/users_with_savings.svg";
+import dashboard_users from "public/images/dashboard/users.svg";
 
 const Images = {
   login_illustration,
@@ -41,6 +45,12 @@ const Images = {
     notification_icon,
     menu_open_icon,
     menu_close_icon,
+  },
+  dashboard: {
+    active_users,
+    users_with_loan,
+    users_with_savings,
+    dashboard_users,
   },
   sidenav: {
     users,
@@ -66,7 +76,7 @@ const Images = {
     system_messages,
     logout,
     dashboard,
-    nav_dropdown
+    nav_dropdown,
   },
 };
 
