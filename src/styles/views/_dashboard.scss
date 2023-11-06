@@ -1,0 +1,30 @@
+@use "../config" as *;
+
+.dashboard {
+  &-content-wrapper {
+    display: flex;
+
+    & .nav-wrapper {
+      display: none;
+
+      @include breakpoint-tab {
+        display: block;
+        width: to-rem(300);
+        max-height: 100vh;
+        overflow-y: scroll;
+        box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.04);
+
+        &::-webkit-scrollbar {
+          width: 0px;
+        }
+      }
+    }
+
+    & main {
+      flex: 1;
+      background-color: $neutral-two-color;
+      overflow-y: scroll;
+      max-height: 100vh;
+    }
+  }
+}

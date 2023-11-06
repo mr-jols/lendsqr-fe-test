@@ -2,7 +2,12 @@
 @use "sass:color";
 
 .nav {
-  padding-top: to-rem(100);
+  padding-top: to-rem(60);
+
+  @include breakpoint-tab-small {
+    padding-top: to-rem(100);
+  }
+
   &-footer {
     font-size: to-rem(12);
     padding-inline: to-rem(30);
@@ -13,6 +18,14 @@
 
 .nav-section {
   margin-top: to-rem(40);
+
+  &--smaller-margin {
+    margin-top: to-rem(30);
+  }
+
+  &--smallest-margin {
+    margin-top: to-rem(10);
+  }
 
   &--with-divider {
     padding-top: to-rem(8);

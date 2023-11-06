@@ -2,91 +2,102 @@
 
 import SearchInputFieldBuilder from "@/components/input/search";
 import LinkBuilder from "@/components/link";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+import useToggle from "@/hooks/useToggle";
 import Images from "@/utils/images";
-import { Divider } from "@mantine/core";
+import { Divider, Drawer } from "@mantine/core";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
-import { Fragment } from "react";
+import { useEffect } from "react";
 
 export default function Home() {
   return (
     <div>
       <Header />
+      <div className="side-container">
+        <div className="navx">
+        <Nav />
+        </div>
+      </div>
+    </div>
+  );
+}
 
-      <nav className="nav side-container">
-        <div className="nav-section">
-          <div className="nav-link nav-link--prominent">
-            <div>
-              <div className="nav-link-icon-wrapper">
-                <Image src={Images.sidenav.organization} alt="icon" />
-              </div>
-              <p>Select Organization</p>
-              <div className="nav-link-icon-wrapper">
-                <Image src={Images.sidenav.nav_dropdown} alt="dropdown icon" />
-              </div>
+function Nav() {
+  return (
+    <nav className="nav">
+      <div className="nav-section">
+        <div className="nav-link nav-link--prominent">
+          <div>
+            <div className="nav-link-icon-wrapper">
+              <Image src={Images.sidenav.organization} alt="icon" />
+            </div>
+            <p>Select Organization</p>
+            <div className="nav-link-icon-wrapper">
+              <Image src={Images.sidenav.nav_dropdown} alt="dropdown icon" />
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="nav-section">
-          <NavLinkItem
-            props={{
-              icon: Images.sidenav.dashboard,
-              title: "Dashboard",
-              href: "/dashboard",
-            }}
-          />
-        </div>
+      <div className="nav-section nav-section--smallest-margin">
+        <NavLinkItem
+          props={{
+            icon: Images.sidenav.dashboard,
+            title: "Dashboard",
+            href: "/dashboard",
+          }}
+        />
+      </div>
 
-        <div className="nav-section">
-          <p className="nav-section-title">Customer</p>
-          <ul>
-            {dashboardLinksData.customers.map((item, index) => (
-              <li key={index}>
-                <NavLinkItem props={item} />
-              </li>
-            ))}
-          </ul>
-        </div>
+      <div className="nav-section nav-section--smaller-margin">
+        <p className="nav-section-title">Customer</p>
+        <ul>
+          {dashboardLinksData.customers.map((item, index) => (
+            <li key={index}>
+              <NavLinkItem props={item} />
+            </li>
+          ))}
+        </ul>
+      </div>
 
-        <div className="nav-section">
-          <p className="nav-section-title">Business</p>
-          <ul>
-            {dashboardLinksData.business.map((item, index) => (
-              <li key={index}>
-                <NavLinkItem props={item} />
-              </li>
-            ))}
-          </ul>
-        </div>
+      <div className="nav-section">
+        <p className="nav-section-title">Business</p>
+        <ul>
+          {dashboardLinksData.business.map((item, index) => (
+            <li key={index}>
+              <NavLinkItem props={item} />
+            </li>
+          ))}
+        </ul>
+      </div>
 
-        <div className="nav-section">
-          <p className="nav-section-title">Settings</p>
-          <ul>
-            {dashboardLinksData.settings.map((item, index) => (
-              <li key={index}>
-                <NavLinkItem props={item} />
-              </li>
-            ))}
-          </ul>
-        </div>
+      <div className="nav-section">
+        <p className="nav-section-title">Settings</p>
+        <ul>
+          {dashboardLinksData.settings.map((item, index) => (
+            <li key={index}>
+              <NavLinkItem props={item} />
+            </li>
+          ))}
+        </ul>
+      </div>
 
-        <div className="nav-section nav-section--with-divider">
-          <NavLinkItem
-            props={{
-              icon: Images.sidenav.logout,
-              title: "Logout",
-              href: "/login",
-              isProminent: true,
-            }}
-          />
-        </div>
+      <div className="nav-section nav-section--with-divider">
+        <NavLinkItem
+          props={{
+            icon: Images.sidenav.logout,
+            title: "Logout",
+            href: "/login",
+            isProminent: true,
+          }}
+        />
+      </div>
 
-        <div className="nav-footer">
-          <span>v1.2.0</span>
-        </div>
-      </nav>
-    </div>
+      <div className="nav-footer">
+        <span>v1.2.0</span>
+      </div>
+    </nav>
   );
 }
 
@@ -244,11 +255,21 @@ const dashboardLinksData: DashboardLinksProps = {
   ],
 };
 
-function HamburgerMenu() {
+function HamburgerMenu({
+  props,
+}: {
+  props: { isOpen: boolean; onClick: () => void };
+}) {
   return (
-    <button className="hamburger-menu">
+    <button className="hamburger-menu" onClick={props.onClick}>
       <div className="hamburger-wrapper">
-        <Image src={Images.header.menu_open_icon} alt="menu_open_icon" />
+        <Image
+          src={
+            props.isOpen
+              ? Images.header.menu_close_icon : Images.header.menu_open_icon
+          }
+          alt={props.isOpen ?"menu_close_icon": "menu_open_icon"  }
+        />
       </div>
     </button>
   );
@@ -281,12 +302,37 @@ function Logo() {
 }
 
 function Header() {
+  const [toggle, handleToggle] = useToggle();
+  const matches = useMediaQuery("(min-width: 1025px)");
+
+  useEffect(() => {
+    if (matches && toggle) handleToggle();
+  }, [toggle, matches]);
+
   return (
     <header className="header">
       <Logo />
       <SearchInputFieldBuilder />
       <HeaderItems />
-      <HamburgerMenu />
+      <HamburgerMenu
+        props={{
+          isOpen: toggle,
+          onClick: handleToggle,
+        }}
+      />
+      <Drawer
+        opened={toggle}
+        onClose={handleToggle}
+        withCloseButton={false}
+        position="left"
+        size="290px"
+        styles={{
+          body: {  padding: 0 },
+          header: { },
+        }}
+      >
+        <Nav />
+      </Drawer>
     </header>
   );
 }
