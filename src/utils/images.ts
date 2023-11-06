@@ -34,6 +34,8 @@ import active_users from "public/images/dashboard/active_users.svg";
 import users_with_loan from "public/images/dashboard/users_with_loan.svg";
 import users_with_savings from "public/images/dashboard/users_with_savings.svg";
 import dashboard_users from "public/images/dashboard/users.svg";
+import filter from "public/images/dashboard/table/filter.svg";
+import actions from "public/images/dashboard/table/actions.svg";
 
 const Images = {
   login_illustration,
@@ -77,6 +79,10 @@ const Images = {
     logout,
     dashboard,
     nav_dropdown,
+  },
+  table: {
+    filter,
+    actions,
   },
 };
 

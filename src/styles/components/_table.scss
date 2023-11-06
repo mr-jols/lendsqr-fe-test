@@ -1,0 +1,60 @@
+@use "../config/" as *;
+@use "sass:color";
+
+.user-table-wrapper {
+  overflow-x: scroll;
+  max-width: 100vw;
+  border: 1px solid color.change($primary-color, $alpha: 0.06);
+  box-shadow: 3px 5px 20px 0px rgba(0, 0, 0, 0.04);
+  padding-inline: to-rem(30);
+  padding-top: to-rem(30);
+  padding-bottom: to-rem(39);
+  margin-inline: to-rem(-20);
+
+  @include breakpoint-tab-small {
+    margin-inline: unset;
+  }
+}
+
+.user-table {
+  width: 100%;
+
+  & th {
+    text-align: left;
+    font-size: to-rem(12);
+    font-weight: 600;
+    text-transform: uppercase;
+    padding-right: to-rem(20);
+    padding-bottom: to-rem(20);
+
+    & .heading-content {
+      display: flex;
+      gap: to-rem(8);
+      align-items: center;
+      .image-wrapper {
+        width: to-rem(16);
+        height: to-rem(16);
+      }
+    }
+  }
+
+  & tr + tr {
+    border-top: 1px solid color.change($primary-color, $alpha: 0.1);
+  }
+
+  & td {
+  }
+
+  &-cell {
+    padding-block: to-rem(22);
+    padding-right: to-rem(20);
+   white-space: nowrap;
+
+    & .image-wrapper{
+        margin-left: auto;
+        margin-right: to-rem(-10);
+        width: to-rem(20);
+        height: to-rem(20);
+    }
+  }
+}
