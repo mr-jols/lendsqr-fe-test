@@ -10,6 +10,7 @@
   padding-top: to-rem(30);
   padding-bottom: to-rem(39);
   margin-inline: to-rem(-20);
+  margin-bottom: to-rem(20);
 
   @include breakpoint-tab-small {
     margin-inline: unset;
@@ -42,19 +43,40 @@
     border-top: 1px solid color.change($primary-color, $alpha: 0.1);
   }
 
-  & td {
-  }
-
   &-cell {
     padding-block: to-rem(22);
     padding-right: to-rem(20);
-   white-space: nowrap;
+    white-space: nowrap;
 
-    & .image-wrapper{
-        margin-left: auto;
-        margin-right: to-rem(-10);
-        width: to-rem(20);
-        height: to-rem(20);
+    @include breakpoint-laptop {
+      white-space: initial;
+      max-width: to-rem(170);
+      word-break: break-all;
+    }
+
+    & .image-wrapper {
+      margin-left: auto;
+      margin-right: to-rem(-10);
+      width: to-rem(20);
+      height: to-rem(20);
     }
   }
+}
+
+
+.user-table-functions{
+    margin-bottom: to-rem(70);
+    & .expand{
+        display: flex;
+        gap:to-rem(10);
+        align-items: center;
+    }
+
+    & select{
+        border:none;
+        padding:to-rem(7) to-rem(12) ;
+        border-radius: to-rem(4);
+        width: to-rem(80);
+        background-color:color.change($primary-color, $alpha: 0.1);
+    }
 }

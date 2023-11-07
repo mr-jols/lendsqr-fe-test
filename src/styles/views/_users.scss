@@ -3,6 +3,7 @@
 
 .user-stats {
   &-cards {
+    margin-top: to-rem(40);
     display: grid;
     gap: to-rem(10);
     grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -20,14 +21,6 @@
     @include breakpoint-laptop {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
-  }
-
-  & .title {
-    font-size: to-rem(24);
-    margin-top: 0;
-    margin-bottom: to-rem(40);
-    font-weight: 500;
-    color: $primary-color;
   }
 
   &-card {

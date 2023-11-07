@@ -36,6 +36,9 @@ import users_with_savings from "public/images/dashboard/users_with_savings.svg";
 import dashboard_users from "public/images/dashboard/users.svg";
 import filter from "public/images/dashboard/table/filter.svg";
 import actions from "public/images/dashboard/table/actions.svg";
+import back_arrow from "public/images/dashboard/details/back_arrow.svg";
+import star_off from "public/images/dashboard/details/star_off.svg";
+import star_on from "public/images/dashboard/details/star_on.svg";
 
 const Images = {
   login_illustration,
@@ -47,6 +50,11 @@ const Images = {
     notification_icon,
     menu_open_icon,
     menu_close_icon,
+  },
+  details: {
+    back_arrow,
+    star_off,
+    star_on,
   },
   dashboard: {
     active_users,

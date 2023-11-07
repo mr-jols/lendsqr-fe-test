@@ -1,15 +1,11 @@
 import Images from "@/utils/images";
 import Image from "next/image";
 
-export default function Playground() {
-  return (
-    <div className="user-details">
-      <RatingBuilder props={{ rating: 3 }} />
-    </div>
-  );
-}
-
-function RatingBuilder({ props }: { props: { rating: 0 | 1 | 2 | 3 } }) {
+export default function RatingBuilder({
+  props,
+}: {
+  props: { rating: 0 | 1 | 2 | 3 };
+}) {
   return (
     <div className="rating">
       {new Array(props.rating).fill("").map((item, index) => (

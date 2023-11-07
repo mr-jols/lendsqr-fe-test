@@ -1,0 +1,10 @@
+@use "../config/" as *;
+
+.rating {
+  &-image-wrapper {
+    width: to-rem(16);
+    height: to-rem(16);
+    display: inline-block;
+    margin-right: to-rem(4);
+  }
+}

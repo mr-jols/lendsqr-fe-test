@@ -1,12 +1,16 @@
 "use client";
 import {
+  ExpandedState,
   createColumnHelper,
   flexRender,
   getCoreRowModel,
+  getExpandedRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import UserStats from "./views/stats";
-import { useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import Images from "@/utils/images";
 import Image from "next/image";
 import {
@@ -15,21 +19,27 @@ import {
   InactiveChipBuilder,
   PendingChipBuilder,
 } from "@/components/chip";
+import { UserStatus, UsersContext, UsersContextType } from "@/context/useUsers";
+import { useQuery } from "@/hooks/useQuery";
+import { UsersResponse, toDomain } from "@/models/response/user";
+import { BASE_URL } from "@/utils/constansts";
 
 export default function UsersPage() {
+  const [data, isLoading, error] = useQuery<UsersResponse>(`${BASE_URL}/users`);
+  const { users, saveUsers } = useContext(UsersContext) as UsersContextType;
+
+  useEffect(() => {
+    console.log(data);
+    if (data?.length != 0 && data != null) {
+      saveUsers(toDomain(data));
+    }
+  }, [data]);
   return (
     <div>
       <UserStats />
       <UserTable />
     </div>
   );
-}
-
-enum UserStatus {
-  active,
-  inactive,
-  blacklisted,
-  pending,
 }
 
 interface UserTableProps {
@@ -41,16 +51,6 @@ interface UserTableProps {
   status: UserStatus;
   action: string;
 }
-
-const tableData: UserTableProps[] = new Array(20).fill({
-  organization: "Lendsqr",
-  username: "Adedeji",
-  email: "adedeji@lendsqr.com",
-  phoneNumber: "08078903721",
-  dateJoined: "May 15, 2020 10:00 AM",
-  status: UserStatus.active,
-  action: "",
-});
 
 const columnHelper = createColumnHelper<UserTableProps>();
 
@@ -97,45 +97,93 @@ const columns = [
 ];
 
 function UserTable() {
-  const [data, setData] = useState(() => [...tableData]);
+  const { users } = useContext(UsersContext) as UsersContextType;
+
+  const [expanded, setExpanded] = useState<ExpandedState>({});
+
+  const data = useMemo(
+    () => [
+      ...users.map((item) => ({
+        organization: item.organization,
+        username: item.fullname,
+        email: item.email,
+        phoneNumber: item.phone_number,
+        dateJoined: item.date_joined,
+        status: item.status,
+        action: "",
+      })),
+    ],
+    [users]
+  );
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    state: {
+      expanded,
+    },
+    onExpandedChange: setExpanded,
+    getPaginationRowModel: getPaginationRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getExpandedRowModel: getExpandedRowModel(),
   });
   return (
-    <div className="user-table-wrapper">
-      <table className="user-table">
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
+    <div>
+      <div className="user-table-wrapper">
+        <table className="user-table">
+          <thead>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <th key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.map((row) => (
+              <tr key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <td key={cell.id}>
+                    <div className="user-table-cell">
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
                       )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
-                  <div className="user-table-cell">
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </div>
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                    </div>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="user-table-functions">
+        <div className="expand">
+          <span>Showing</span>
+          <select
+            value={table.getState().pagination.pageSize}
+            onChange={(e) => {
+              table.setPageSize(Number(e.target.value));
+            }}
+          >
+            {[10, 20, 30, 40, 50].map((pageSize) => (
+              <option key={pageSize} value={pageSize}>
+                {pageSize}
+              </option>
+            ))}
+          </select>
+          <span>out of {UserStats.length}</span>
+        </div>
+      </div>
     </div>
   );
 }

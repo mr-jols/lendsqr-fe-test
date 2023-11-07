@@ -4,6 +4,13 @@
     height: 100vh;
     overflow: hidden;
 
+    &-title {
+      font-size: to-rem(24);
+      margin: 0;
+      font-weight: 500;
+      color: $primary-color;
+    }
+
   &-content-wrapper {
     display: flex;
     background-color: $neutral-two-color;
