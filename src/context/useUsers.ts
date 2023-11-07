@@ -1,6 +1,6 @@
 "use client";
 import { UserResponse } from "@/models/response/user";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export enum UserStatus {
   active,
@@ -9,8 +9,9 @@ export enum UserStatus {
   pending,
 }
 
-export interface UserState extends UserResponse {
+export interface UserState extends Omit<UserResponse, "maritalstatus"> {
   status: UserStatus;
+  maritalstatus: string;
 }
 
 export interface UsersContextType {
@@ -22,8 +23,14 @@ export interface UsersContextType {
 
 export const UsersContext = createContext<UsersContextType | null>(null);
 
-export default function useUsers():UsersContextType {
+export default function useUsers(): UsersContextType {
   const [users, setUsers] = useState<UserState[] | []>([]);
+
+  useEffect(() => {
+    if (users.length > 0) {
+      localStorage.setItem("users", JSON.stringify(users));
+    }
+  }, [users]);
 
   function saveUsers(users: UserState[]) {
     setUsers(users);
@@ -49,5 +56,5 @@ export default function useUsers():UsersContextType {
     }
   }
 
-  return {users,saveUsers,blacklistUser,activateUser};
+  return { users, saveUsers, blacklistUser, activateUser };
 }

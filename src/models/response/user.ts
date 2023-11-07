@@ -31,6 +31,8 @@ export interface UserResponse {
   guarantor_email: string;
   guarantor_relationship: number;
   id: string;
+  tier: number;
+  amount: string;
 }
 
 export type UsersResponse = UserResponse[];
@@ -38,8 +40,11 @@ export type UsersResponse = UserResponse[];
 export function toDomain(users: UserResponse[]): UserState[] {
   return users.map((item) => ({
     ...item,
-    phone_number:item.phone_number.substring(0,12),
-    date_joined:formatDate(item.date_joined),
+    phone_number: item.phone_number.substring(0, 12),
+    date_joined: formatDate(item.date_joined),
+    maritalstatus: item.maritalstatus ? "Single":"Married",
+    children: item.children % 4,
+    tier: item.tier % 3,
     status:
       item.status % 4 == 0
         ? UserStatus.pending

@@ -73,19 +73,16 @@ const sectionDataThree: SectionItemProps = {
   ]),
 };
 
-
 const sectionDataFour: SectionItemProps = {
-    title: "Guarantor",
-    fields: new Map([
-      ["full Name", "Debby Ogana"],
-      ["Phone Number", "07060780922"],
-      ["Email Address", "debby@gmail.com"],
-      ["Relationship","Sister"]
-    ]),
-  };
+  title: "Guarantor",
+  fields: new Map([
+    ["full Name", "Debby Ogana"],
+    ["Phone Number", "07060780922"],
+    ["Email Address", "debby@gmail.com"],
+    ["Relationship", "Sister"],
+  ]),
+};
 
-
-  
 function SectionItem({ props }: { props: SectionItemProps }) {
   return (
     <div className="user-details-section-item">

@@ -39,6 +39,9 @@ import actions from "public/images/dashboard/table/actions.svg";
 import back_arrow from "public/images/dashboard/details/back_arrow.svg";
 import star_off from "public/images/dashboard/details/star_off.svg";
 import star_on from "public/images/dashboard/details/star_on.svg";
+import activate from "public/images/dashboard/menu/activate.svg"
+import deactivate from "public/images/dashboard/menu/deactivate.svg"
+import view from "public/images/dashboard/menu/view.svg";
 
 const Images = {
   login_illustration,
@@ -92,6 +95,11 @@ const Images = {
     filter,
     actions,
   },
+  menu:{
+    activate,
+    deactivate,
+    view
+  }
 };
 
 export default Images;

@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@mantine/core": "^7.1.7",
+    "@mantine/core": "^7.2.1",
     "@tanstack/react-table": "^8.10.7",
     "next": "14.0.1",
     "react": "^18",

@@ -192,6 +192,11 @@
       border: 1px solid;
       letter-spacing: to-rem(1.4);
       text-transform: uppercase;
+      transition: scale 0.15s ease-out;
+
+      &:active{
+        scale: 0.95;
+      }
 
       &--blacklist {
         color: $accent-one-color;
