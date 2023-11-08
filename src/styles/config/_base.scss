@@ -2,12 +2,14 @@
 @use "colors" as *;
 @use "mixins" as *;
 @use "functions" as *;
+@use "typography" as *;
+@use "sass:color";
 
 //general styles
 
 html {
   font-size: 14px;
-
+font-family: $font-family--Avenir;
   @include breakpoint-desktop {
     font-size: 1vw;
   }
@@ -63,3 +65,11 @@ img {
   object-fit: contain;
   height: 100%;
 }
+
+button{
+  transition: scale 0.15s ease-out;
+  &:active{
+    scale:0.95;
+  }
+}
+

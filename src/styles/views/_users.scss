@@ -61,8 +61,9 @@
     &-title {
       text-transform: uppercase;
       font-weight: 500;
+      font-size: to-rem(14);
       margin-top: to-rem(14);
-      margin-bottom: to-rem(12);
+      margin-bottom: to-rem(10);
     }
 
     &-content {

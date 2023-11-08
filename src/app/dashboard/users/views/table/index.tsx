@@ -35,27 +35,27 @@ const columnHelper = createColumnHelper<UserTableProps>();
 
 const columns = [
   columnHelper.accessor("organization", {
-    header: (_) => <HeadingFilters props={{ title: "Organization" }} />,
+    header: (info) => <HeadingFilters props={{ title: "Organization" }} />,
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("username", {
-    header: (_) => <HeadingFilters props={{ title: "Username" }} />,
+    header: (info) => <HeadingFilters props={{ title: "Username" }} />,
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("email", {
-    header: (_) => <HeadingFilters props={{ title: "Email" }} />,
+    header: (info) => <HeadingFilters props={{ title: "Email" }} />,
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("phoneNumber", {
-    header: (_) => <HeadingFilters props={{ title: "Phone Number" }} />,
+    header: (info) => <HeadingFilters props={{ title: "Phone Number" }} />,
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("dateJoined", {
-    header: (_) => <HeadingFilters props={{ title: "Date joined" }} />,
+    header: (info) => <HeadingFilters props={{ title: "Date joined" }} />,
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("status", {
-    header: (_) => <HeadingFilters props={{ title: "Status" }} />,
+    header: (info) => <HeadingFilters props={{ title: "Status" }} />,
     cell(info) {
       switch (info.getValue()) {
         case UserStatus.active:

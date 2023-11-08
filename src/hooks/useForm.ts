@@ -4,6 +4,10 @@ import { useEffect, useState } from "react";
 export enum FormElementType {
   email,
   password,
+  select,
+  date,
+  text,
+  number
 }
 
 export interface FormStateProps {

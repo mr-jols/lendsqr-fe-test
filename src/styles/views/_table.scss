@@ -20,83 +20,43 @@
 .user-table {
   width: 100%;
 
-
-  &-filters{
+  &-filters {
+    width: 270px;
+    background-color: $neutral-color;
     padding: to-rem(30) to-rem(20);
-  .input-bars {
-      margin: 10px 20px;
-  
-      label {
-          font-weight: 500;
-          font-size: 14px;
-          line-height: 16px;
-          color: $on-primary-color;
-          margin: 10px 0;
-          text-transform: capitalize;
-      }
-  
-      input, select {
-          background: $neutral-color;
-          border: 1px solid rgba(33, 63, 125, 0.2);
-          border-radius: 8px;
-          font-weight: 400;
-          font-size: 14px;
-          line-height: 16px;
-          color: $on-primary-color;
-  
-          &:focus {
-              outline: none;
-              border: 1px solid $secondary-color;
-          }
-  
-          &::placeholder {
-              color: $on-primary-color;
-              font-family: 'Work Sans';
-              font-style: normal;
-              font-weight: 400;
-              font-size: 14px;
-              line-height: 16px;
-              opacity: 0.7;
-          }
-      }
-  
-      select {
-        padding:to-rem(12) to-rem(20) ;
-          -webkit-appearance: none;
-          background-image: url('../../../public/images/sidenav/dropdown.svg');
-          background-repeat: no-repeat;
-          background-position: calc(100% - to-rem(16)) center;
-          background-size: to-rem(14);
-          width:100%;
-      }
-  
-      .filter-button {
-          font-family: 'Work Sans';
-          font-weight: 600;
-          font-size: 14px;
-          line-height: 16px;
-          text-transform: capitalize;
-          cursor: pointer;
-      }
-  
-      .filter-button:nth-child(1) {
-          border: 1px solid $on-primary-color;
-          border-radius: 8px;
-          background-color: $neutral-color;
-          color: $on-primary-color;
-         
-      }
-  
-      .filter-button:nth-child(2) {
-          border: 1px solid $secondary-color;
-          border-radius: 8px;
-          background-color: $secondary-color;
-          color: $on-primary-color;
-        
-      }
-  }
-  
-  
+    position: absolute;
+    border-radius: to-rem(4);
+    border: 1px solid rgba(84, 95, 125, 0.14);
+    box-shadow: 3px 5px 20px 0px rgba(0, 0, 0, 0.04);
+    left: to-rem(-135);
+    top: to-rem(30);
+
+    & > * + * {
+      margin-top: to-rem(20);
+    }
+
+    & input,
+    .select {
+      padding: to-rem(12) to-rem(20);
+      border-radius: to-rem(8);
+      border: 1px solid color.change($primary-color, $alpha: 0.2);
+    }
+
+    & .select {
+      padding: to-rem(12) to-rem(20);
+      -webkit-appearance: none;
+      background-image: url("../../../public/images/sidenav/dropdown.svg");
+      background-repeat: no-repeat;
+      background-position: calc(100% - to-rem(16)) center;
+      background-size: to-rem(14);
+      width: 100%;
+    }
+
+    .buttons {
+      display: flex;
+      gap: to-rem(14);
+      padding-top: to-rem(20);
+    }
   }
 
   & th {
@@ -111,9 +71,12 @@
       display: flex;
       gap: to-rem(8);
       align-items: center;
+
       .image-wrapper {
         width: to-rem(16);
         height: to-rem(16);
+        position: relative;
+        display: flex;
       }
     }
   }
@@ -148,21 +111,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap:to-rem(20);
-  
+  gap: to-rem(20);
 
-
-  @include breakpoint-tab-small{
+  @include breakpoint-tab-small {
     flex-direction: row;
     justify-content: space-between;
-    gap:unset;
-
+    gap: unset;
   }
   & .expand {
     display: flex;
     gap: to-rem(10);
     align-items: center;
-  
 
     & select {
       outline: none;
@@ -190,7 +149,7 @@
       justify-content: center;
     }
 
-    & .visible-cells{
+    & .visible-cells {
       margin-left: to-rem(10);
       background-color: transparent;
       padding: 0;
@@ -227,4 +186,8 @@
   }
 }
 
-
+.mantine-Menu-dropdown {
+  border-radius: to-rem(4) !important;
+  border: 1px solid rgba(84, 95, 125, 0.14) !important;
+  box-shadow: 3px 5px 20px 0px rgba(0, 0, 0, 0.04) !important;
+}

@@ -28,7 +28,7 @@ export default function RootLayout({
         value={{ users, blacklistUser, activateUser, saveUsers }}
       >
         <MantineProvider>
-          <body className={workSans.className}>{children}</body>
+          <body >{children}</body>
         </MantineProvider>
       </UsersContext.Provider>
     </html>
