@@ -37,11 +37,7 @@ export default function HeadingFilters({
       }
     }
   }
-
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
-
+  
   useEffect(() => {
     document.addEventListener("mousedown", handleOutsideClick);
     return () => {

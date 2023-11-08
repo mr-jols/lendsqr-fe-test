@@ -10,8 +10,6 @@ export default function UserDetailIntroSection({
 }) {
   const { users } = useContext(UsersContext) as UsersContextType;
 
-  console.log("users", users);
-
   return (
     <section className="user-details-section">
       <div className="user-details-section-intro">

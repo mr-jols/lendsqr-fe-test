@@ -5,7 +5,7 @@ Built with React.js, Typescript, React Context API and SASS.
 
 ## Demo Link
 
-Access the web application at: [Lendsqr] 
+Access the web application at: [Lendsqr](https://hassan-jolaoluwa-lendsqr-fe-test.vercel.app/login)
 
 ## Technologies
 
@@ -31,7 +31,7 @@ To Start Server:
 
 To Visit App:
 
-`http://localhost:300/`  
+`http://localhost:3000/`  
 
 ## Approach
 
