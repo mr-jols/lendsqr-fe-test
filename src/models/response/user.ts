@@ -37,12 +37,14 @@ export interface UserResponse {
 
 export type UsersResponse = UserResponse[];
 
+
+//transforms api response to app state model
 export function toDomain(users: UserResponse[]): UserState[] {
   return users.map((item) => ({
     ...item,
     phone_number: item.phone_number.substring(0, 12),
     date_joined: formatDate(item.date_joined),
-    maritalstatus: item.maritalstatus ? "Single":"Married",
+    maritalstatus: item.maritalstatus ? "Single" : "Married",
     children: item.children % 4,
     tier: item.tier % 3,
     status:

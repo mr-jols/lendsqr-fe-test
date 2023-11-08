@@ -1,11 +1,11 @@
 import login_illustration from "public/images/login_illustration.webp";
-import logo_icon from "public/images/logo_icon.svg";
-import search_icon from "public/images/search_icon.svg";
+import logo from "public/images/logo.svg";
+import search from "public/images/search.svg";
 import avatar from "public/images/header/avatar.webp";
-import dropdown_icon from "public/images/header/dropdown_icon.svg";
-import notification_icon from "public/images/header/notification_icon.webp";
-import menu_open_icon from "public/images/header/menu_open_icon.svg";
-import menu_close_icon from "public/images/header/menu_close_icon.svg";
+import dropdown from "public/images/header/dropdown.svg";
+import notification from "public/images/header/notification.webp";
+import menu_open from "public/images/header/menu_open.svg";
+import menu_close from "public/images/header/menu_close.svg";
 import users from "public/images/sidenav/users.svg";
 import guarantors from "public/images/sidenav/guarantors.svg";
 import loans from "public/images/sidenav/loans.svg";
@@ -47,14 +47,14 @@ import next from "public/images/dashboard/table/next.svg";
 
 const Images = {
   login_illustration,
-  logo_icon,
-  search_icon,
+  logo,
+  search,
   header: {
     avatar,
-    dropdown_icon,
-    notification_icon,
-    menu_open_icon,
-    menu_close_icon,
+    dropdown,
+    notification,
+    menu_open,
+    menu_close,
   },
   details: {
     back_arrow,

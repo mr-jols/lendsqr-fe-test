@@ -59,13 +59,13 @@ label {
   color: $secondary-color;
   cursor: default;
   text-transform: uppercase;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .forgot-password {
   text-transform: uppercase;
   font-size: to-rem(12);
-  font-weight: bold;
+  font-weight: 600;
   margin-top: to-rem(24);
   letter-spacing: to-rem(1.2);
   color: $secondary-color;
@@ -83,7 +83,6 @@ label {
   display: block;
   background-color: $neutral-color;
   font-weight: bold;
-  letter-spacing: to-rem(1.4);
   transition: all 0.15s;
 
   &--green {

@@ -21,8 +21,10 @@ export function InputFieldBuilder({ props }: { props: InputFieldProps }) {
         value={props.value ?? ""}
         onChange={(e) => props.onChange(e.target.value)}
         onBlur={(_)=>props.onBlur?.call({})}
-      ></input>
+      />
       <ErrorBuilder props={props.errorMessage} />
     </div>
   );
 }
+
+

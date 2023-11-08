@@ -13,6 +13,8 @@ export interface FormStateProps {
   sumbitButtonState: SubmitButtonStateProps;
 }
 
+
+//string error message is used for required elements with [string,string] is used for required elements that can have invalid states
 export interface FormElementConfigProps {
   shouldValidate: boolean;
   type: FormElementType;
@@ -77,8 +79,8 @@ export function updateIsDirty(
 export function updateSubmitButtonState(
   currentState: FormStateProps,
   buttonState: SubmitButtonStateProps
-) {
-  return { ...currentState, buttonState };
+): FormStateProps {
+  return { ...currentState, sumbitButtonState: buttonState };
 }
 
 export function initialFormState(length: number): FormStateProps {
@@ -112,13 +114,8 @@ export default function useForm(
     initialFormState(init.length)
   );
 
-
   function handleValueChange(update: UpdateValuesProps) {
     setFormState(updateValue(formState, update));
-  }
-
-  function handleErrorChange(update: UpdateErrorsProps) {
-    setFormState(updateErrors(formState, update));
   }
 
   function handleIsDirtyChange(update: UpdateIsDirtyProps) {
@@ -188,12 +185,23 @@ export function validateFormElements(
   currentState: FormStateProps,
   elements: FormElementConfigProps[]
 ): FormStateProps {
-  return {
+  const state: FormStateProps = {
     ...currentState,
     errors: currentState.errors.map(
       (item, index) =>
         validateFormElement(currentState, elements[index]).errors[index]
     ),
+  };
+
+
+  return {
+    ...state,
+    sumbitButtonState: {
+      ...state.sumbitButtonState,
+      isLoading:
+        state.errors.filter((item, index) => item == "").length ==
+        state.values.length,
+    },
   };
 }
 

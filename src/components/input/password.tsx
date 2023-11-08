@@ -24,7 +24,7 @@ export function PasswordInputFieldBuilder({
           value={props?.value ?? ""}
           onChange={(e) => props.onChange(e.target.value)}
           onBlur={(_)=>props.onBlur?.call({})}
-        ></input>
+       />
       </div>
       <ErrorBuilder props={props.errorMessage} />
       <p className="forgot-password">Forgot Password</p>

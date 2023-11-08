@@ -18,9 +18,8 @@ import {
   PendingChipBuilder,
 } from "@/components/chip";
 import { UserStatus, UsersContext, UsersContextType } from "@/context/useUsers";
-import UserStats from "../stats";
-import { Menu } from "@mantine/core";
-import LinkBuilder from "@/components/link";
+import { ActionTooltip } from "./actions";
+import HeadingFilters from "./filters";
 
 interface UserTableProps {
   organization: string;
@@ -36,27 +35,27 @@ const columnHelper = createColumnHelper<UserTableProps>();
 
 const columns = [
   columnHelper.accessor("organization", {
-    header: (_) => <Heading props={{ title: "Organization" }} />,
+    header: (_) => <HeadingFilters props={{ title: "Organization" }} />,
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("username", {
-    header: (_) => <Heading props={{ title: "Username" }} />,
+    header: (_) => <HeadingFilters props={{ title: "Username" }} />,
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("email", {
-    header: (_) => <Heading props={{ title: "Email" }} />,
+    header: (_) => <HeadingFilters props={{ title: "Email" }} />,
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("phoneNumber", {
-    header: (_) => <Heading props={{ title: "Phone Number" }} />,
+    header: (_) => <HeadingFilters props={{ title: "Phone Number" }} />,
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("dateJoined", {
-    header: (_) => <Heading props={{ title: "Date joined" }} />,
+    header: (_) => <HeadingFilters props={{ title: "Date joined" }} />,
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("status", {
-    header: (_) => <Heading props={{ title: "Status" }} />,
+    header: (_) => <HeadingFilters props={{ title: "Status" }} />,
     cell(info) {
       switch (info.getValue()) {
         case UserStatus.active:
@@ -105,6 +104,7 @@ export default function UserTable() {
   const table = useReactTable({
     data,
     columns,
+   autoResetPageIndex:false,
     getCoreRowModel: getCoreRowModel(),
     state: {
       expanded,
@@ -214,78 +214,13 @@ export default function UserTable() {
   );
 }
 
-function Heading({ props }: { props: { title: string } }) {
-  return (
-    <div className="heading-content">
-      {props.title}
-      <div className="image-wrapper">
-        <Image src={Images.table.filter} alt="filter icon" />
-      </div>
-    </div>
-  );
-}
-
-function ActionTooltip({ props }: { props: { index: number } }) {
-  const [opened, setOpened] = useState(false);
-  const { blacklistUser, activateUser } = useContext(
-    UsersContext
-  ) as UsersContextType;
-  return (
-    <Menu opened={opened} onChange={setOpened} width={180}>
-      <Menu.Target>
-        <button className="action-tooltip">
-          <div className="image-wrapper">
-            <Image src={Images.table.actions} alt="actions icon" />
-          </div>
-        </button>
-      </Menu.Target>
-
-      <Menu.Dropdown>
-        <div className="action-tooltip-menu">
-          <LinkBuilder
-            props={{
-              child: (
-                <>
-                  <div className="menu-image-wrapper">
-                    <Image src={Images.menu.view} alt="menu icon" />
-                  </div>
-                  <span>View Detail</span>
-                </>
-              ),
-              href: `/dashboard/user/${props.index + 1}`,
-              className: "action-tooltip-menu-item",
-            }}
-          />
-
-          <button
-            className="action-tooltip-menu-item"
-            onClick={() => blacklistUser(props.index)}
-          >
-            <div className="menu-image-wrapper">
-              <Image src={Images.menu.deactivate} alt="menu icon" />
-            </div>
-            <span>Blacklist User</span>
-          </button>
-
-          <button
-            className="action-tooltip-menu-item"
-            onClick={() => activateUser(props.index)}
-          >
-            <div className="menu-image-wrapper">
-              <Image src={Images.menu.activate} alt="menu icon" />
-            </div>
-            <span>Activate User</span>
-          </button>
-        </div>
-      </Menu.Dropdown>
-    </Menu>
-  );
-}
-
 function ellipses(input: number, state: number): any[] {
   const array =
     input - 2 <= state + 3
       ? ["...", input - 4, input - 3, input - 2, input - 1, input]
       : [1 + state, 2 + state, 3 + state, "...", input - 1, input];
-  return array;
+  return array.filter((item,index)=>{
+    if(item==="...") return true;
+    return (item as number) > 0;
+  });
 }

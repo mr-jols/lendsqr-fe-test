@@ -58,8 +58,8 @@ function HamburgerMenu({
         <Image
           src={
             props.isOpen
-              ? Images.header.menu_close_icon
-              : Images.header.menu_open_icon
+              ? Images.header.menu_close
+              : Images.header.menu_open
           }
           alt={props.isOpen ? "menu_close_icon" : "menu_open_icon"}
         />
@@ -73,14 +73,14 @@ function HeaderItems() {
     <div className="header-items">
       <span className="docs">Docs</span>
       <div className="notification-icon-wrapper">
-        <Image src={Images.header.notification_icon} alt="notification icon" />
+        <Image src={Images.header.notification} alt="notification icon" />
       </div>
       <div className="avatar-wrapper">
         <Image src={Images.header.avatar} alt="avatar" />
       </div>
       <span className="user-name">Adedeji</span>
       <div className="dropdown-icon-wrapper">
-        <Image src={Images.header.dropdown_icon} alt="dropdown icon" />
+        <Image src={Images.header.dropdown} alt="dropdown icon" />
       </div>
     </div>
   );
@@ -89,7 +89,7 @@ function HeaderItems() {
 function Logo() {
   return (
     <div className="logo-icon-wrapper logo-icon-wrapper--smaller">
-      <Image src={Images.logo_icon} alt="logo icon" className="logo-icon" />
+      <Image src={Images.logo} alt="logo icon" className="logo-icon" />
     </div>
   );
 }

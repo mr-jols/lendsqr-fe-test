@@ -11,16 +11,13 @@
   box-shadow: 3px 0px 20px 0px rgba(0, 0, 0, 0.04);
   padding: to-rem(20);
 
-
-
-  .left-section{
+  .left-section {
     display: flex;
     width: 65%;
     justify-content: space-between;
 
-
-    @include breakpoint-laptop{
-        width: 52%;
+    @include breakpoint-laptop {
+      width: 52%;
     }
   }
 

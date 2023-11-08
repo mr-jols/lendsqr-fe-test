@@ -4,16 +4,12 @@ import "@/styles/main.scss";
 import { MantineProvider } from "@mantine/core";
 import useUsers, { UsersContext } from "@/context/useUsers";
 import "@mantine/core/styles.css";
+import Head from "next/head";
 
 const workSans = Work_Sans({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
 });
-
-// export const metadata: Metadata = {
-//   title: "Lendsqr fe test",
-//   description: "",
-// };
 
 export default function RootLayout({
   children,
@@ -21,9 +17,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const { users, blacklistUser, activateUser, saveUsers } = useUsers();
-  
+
   return (
     <html lang="en">
+      <Head>
+      <link rel="icon" href="/favicon.icon"></link>
+      <title>Lendsqr fe test</title>
+      </Head>
       <UsersContext.Provider
         value={{ users, blacklistUser, activateUser, saveUsers }}
       >

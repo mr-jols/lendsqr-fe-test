@@ -6,7 +6,7 @@ export default function SearchInputFieldBuilder() {
       <div className="search-input">
         <button>
           <div className="icon-wrapper">
-            <Image src={Images.search_icon} alt="Search icon" />
+            <Image src={Images.search} alt="Search icon" />
           </div>
         </button>
         <input type="search" placeholder="Search for anything" />

@@ -3,6 +3,8 @@
 @use "mixins" as *;
 @use "functions" as *;
 
+//general styles
+
 html {
   font-size: 14px;
 
@@ -17,31 +19,13 @@ html {
   padding: 0;
   box-sizing: border-box !important;
 }
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
 }
 
-button{
-    border:none;
-    background: $neutral-color;
-}
-
-.center-container {
-  max-width: 500px;
-  height: 100vh;
-  display: flex;
-  margin-inline: auto;
-  justify-content: center;
-  align-items: center;
-}
-
-.side-container{
-width: to-rem(300);
-
-}
-
-.center-container > * {
-  width: 100%;
+button {
+  border: none;
+  background: $neutral-color;
 }
 
 .giveborder {
