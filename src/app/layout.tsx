@@ -1,36 +1,27 @@
-"use client";
-import { Work_Sans } from "next/font/google";
 import "@/styles/main.scss";
-import { MantineProvider } from "@mantine/core";
-import useUsers, { UsersContext } from "@/context/useUsers";
 import "@mantine/core/styles.css";
 import Head from "next/head";
+import Providers from "./providers";
+import type { Metadata } from "next";
 
-const workSans = Work_Sans({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-});
+export const metadata: Metadata = {
+  title: "Lendsqr Fe Test",
+  description: "",
+};
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { users, blacklistUser, activateUser, saveUsers } = useUsers();
-
   return (
     <html lang="en">
       <Head>
-      <link rel="icon" href="/favicon.icon"></link>
-      <title>Lendsqr fe test</title>
+        <link rel="icon" href="/favicon.icon"></link>
       </Head>
-      <UsersContext.Provider
-        value={{ users, blacklistUser, activateUser, saveUsers }}
-      >
-        <MantineProvider>
-          <body >{children}</body>
-        </MantineProvider>
-      </UsersContext.Provider>
+      <Providers>
+        <body>{children}</body>
+      </Providers>
     </html>
   );
 }

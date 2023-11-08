@@ -1,9 +1,14 @@
 import { InputFieldBuilder } from "@/components/input";
 import { SelectInputFieldBuilder } from "@/components/input/select";
-import { FormElementType } from "@/hooks/useForm";
+import { FilterFormContext } from "@/context/useFormFilter";
+import {
+  GlobalFilterContext,
+  GlobalFilterContextType,
+} from "@/context/useGlobalFilter";
+import { FormElementType, FormHookOutputProps } from "@/hooks/useForm";
 import Images from "@/utils/images";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 export default function HeadingFilters({
   props,
@@ -12,6 +17,12 @@ export default function HeadingFilters({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const modalRef = useRef<HTMLTableRowElement>(null);
+  const { state, dispatch } = useContext(
+    FilterFormContext
+  ) as FormHookOutputProps;
+  const { globalFilter,setGlobalFilter} = useContext(
+    GlobalFilterContext
+  ) as GlobalFilterContextType;
 
   function handleOutsideClick(event: MouseEvent): void {
     if (modalRef.current) {
@@ -28,11 +39,15 @@ export default function HeadingFilters({
   }
 
   useEffect(() => {
+    console.log(state);
+  }, [state]);
+
+  useEffect(() => {
     document.addEventListener("mousedown", handleOutsideClick);
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
-  });
+  }, []);
 
   return (
     <div className="heading-content">
@@ -53,9 +68,13 @@ export default function HeadingFilters({
                 errorMessage: "",
                 placeholder: "Select Organization",
                 label: "Organization",
-                onChange: () => "",
+                onChange: (e) =>
+                  dispatch.handleValueChange({
+                    index: 0,
+                    value: e,
+                  }),
                 options: ["lendsqr", "irorun"],
-                value: "",
+                value: state.values[0],
                 type: FormElementType.select,
               }}
             />
@@ -63,63 +82,87 @@ export default function HeadingFilters({
             <InputFieldBuilder
               props={{
                 errorMessage: "",
-                placeholder: "username",
+                placeholder: "Username",
                 label: "Username",
-                onChange: () => "",
+                onChange: (e) =>
+                  dispatch.handleValueChange({
+                    index: 1,
+                    value: e,
+                  }),
                 type: FormElementType.text,
-                value: "",
+                value: state.values[1],
               }}
             />
             <InputFieldBuilder
               props={{
                 errorMessage: "",
-                placeholder: "email",
+                placeholder: "Email",
                 label: "Email",
-                onChange: () => "",
+                onChange: (e) =>
+                  dispatch.handleValueChange({
+                    index: 2,
+                    value: e,
+                  }),
                 type: FormElementType.email,
-                value: "",
+                value: state.values[2],
               }}
             />
 
             <InputFieldBuilder
               props={{
                 errorMessage: "",
-                placeholder: "date",
+                placeholder: "Date",
                 label: "Date",
-                onChange: () => "",
+                onChange: (e) =>
+                  dispatch.handleValueChange({
+                    index: 3,
+                    value: e,
+                  }),
                 type: FormElementType.date,
-                value: "",
+                value: state.values[3],
               }}
             />
 
             <InputFieldBuilder
               props={{
                 errorMessage: "",
-                placeholder: "Phonenumber",
+                placeholder: "Phone Number",
                 label: "Phone Number",
-                onChange: () => "",
+                onChange: (e) =>
+                  dispatch.handleValueChange({
+                    index: 4,
+                    value: e,
+                  }),
                 type: FormElementType.number,
-                value: "",
+                value: state.values[4],
               }}
             />
 
             <SelectInputFieldBuilder
               props={{
                 errorMessage: "",
-                placeholder: "status",
+                placeholder: "Status",
                 label: "Status",
-                onChange: () => "",
+                onChange: (e) =>
+                  dispatch.handleValueChange({
+                    index: 5,
+                    value: e,
+                  }),
                 options: ["active", "pending", "blacklisted", "inactive"],
-                value: "",
+                value: state.values[5],
                 type: FormElementType.select,
               }}
             />
 
             <div className="buttons">
-              <button className="submit-button submit-button--outlined">
+              <button className="submit-button submit-button--outlined" onClick={
+                ()=> setGlobalFilter("")
+              }>
                 Reset
               </button>
-              <button className="submit-button submit-button--green">
+              <button className="submit-button submit-button--green" onClick={()=>{
+                setGlobalFilter(state.values[0])
+              }}>
                 Filter
               </button>
             </div>

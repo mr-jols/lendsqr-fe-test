@@ -7,7 +7,7 @@ export enum FormElementType {
   select,
   date,
   text,
-  number
+  number,
 }
 
 export interface FormStateProps {
@@ -17,13 +17,13 @@ export interface FormStateProps {
   sumbitButtonState: SubmitButtonStateProps;
 }
 
-
 //string error message is used for required elements with [string,string] is used for required elements that can have invalid states
 export interface FormElementConfigProps {
   shouldValidate: boolean;
   type: FormElementType;
   index: number;
   errorMessages: [string, string] | string;
+  initialValue?: string;
 }
 
 interface UpdateValuesProps {
@@ -87,11 +87,13 @@ export function updateSubmitButtonState(
   return { ...currentState, sumbitButtonState: buttonState };
 }
 
-export function initialFormState(length: number): FormStateProps {
+export function initialFormState(
+  values: FormElementConfigProps[]
+): FormStateProps {
   return {
-    errors: new Array(length).fill(""),
-    isDirty: new Array(length).fill(false),
-    values: new Array(length).fill(""),
+    errors: new Array(values.length).fill(""),
+    isDirty: new Array(values.length).fill(false),
+    values: values.map((item, index) => item?.initialValue ?? ""),
     sumbitButtonState: {
       isDisabled: false,
       isLoading: false,
@@ -100,7 +102,7 @@ export function initialFormState(length: number): FormStateProps {
   };
 }
 
-interface FormHookOutputProps {
+export interface FormHookOutputProps {
   state: FormStateProps;
   dispatch: {
     handleValueChange(update: UpdateValuesProps): void;
@@ -115,7 +117,7 @@ export default function useForm(
   init: FormElementConfigProps[]
 ): FormHookOutputProps {
   const [formState, setFormState] = useState<FormStateProps>(
-    initialFormState(init.length)
+    initialFormState(init)
   );
 
   function handleValueChange(update: UpdateValuesProps) {
@@ -196,7 +198,6 @@ export function validateFormElements(
         validateFormElement(currentState, elements[index]).errors[index]
     ),
   };
-
 
   return {
     ...state,

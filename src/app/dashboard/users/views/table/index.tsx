@@ -20,6 +20,10 @@ import {
 import { UserStatus, UsersContext, UsersContextType } from "@/context/useUsers";
 import { ActionTooltip } from "./actions";
 import HeadingFilters from "./filters";
+import {
+  GlobalFilterContext,
+  GlobalFilterContextType,
+} from "@/context/useGlobalFilter";
 
 interface UserTableProps {
   organization: string;
@@ -83,8 +87,10 @@ const columns = [
 
 export default function UserTable() {
   const { users } = useContext(UsersContext) as UsersContextType;
-
   const [expanded, setExpanded] = useState<ExpandedState>({});
+  const { globalFilter, setGlobalFilter } = useContext(
+    GlobalFilterContext
+  ) as GlobalFilterContextType;
 
   const data = useMemo(
     () => [
@@ -104,12 +110,14 @@ export default function UserTable() {
   const table = useReactTable({
     data,
     columns,
-   autoResetPageIndex:false,
+    autoResetPageIndex: false,
     getCoreRowModel: getCoreRowModel(),
     state: {
       expanded,
+      globalFilter,
     },
     onExpandedChange: setExpanded,
+    onGlobalFilterChange: setGlobalFilter,
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
@@ -219,8 +227,8 @@ function ellipses(input: number, state: number): any[] {
     input - 2 <= state + 3
       ? ["...", input - 4, input - 3, input - 2, input - 1, input]
       : [1 + state, 2 + state, 3 + state, "...", input - 1, input];
-  return array.filter((item,index)=>{
-    if(item==="...") return true;
+  return array.filter((item, index) => {
+    if (item === "...") return true;
     return (item as number) > 0;
   });
 }
