@@ -42,6 +42,8 @@ import star_on from "public/images/dashboard/details/star_on.svg";
 import activate from "public/images/dashboard/menu/activate.svg"
 import deactivate from "public/images/dashboard/menu/deactivate.svg"
 import view from "public/images/dashboard/menu/view.svg";
+import previous from "public/images/dashboard/table/previous.svg";
+import next from "public/images/dashboard/table/next.svg";
 
 const Images = {
   login_illustration,
@@ -94,6 +96,8 @@ const Images = {
   table: {
     filter,
     actions,
+    previous,
+    next
   },
   menu:{
     activate,

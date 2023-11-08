@@ -36,27 +36,27 @@ const columnHelper = createColumnHelper<UserTableProps>();
 
 const columns = [
   columnHelper.accessor("organization", {
-    header: (_) => <RenderHeading props={{ title: "Organization" }} />,
+    header: (_) => <Heading props={{ title: "Organization" }} />,
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("username", {
-    header: (_) => <RenderHeading props={{ title: "Username" }} />,
+    header: (_) => <Heading props={{ title: "Username" }} />,
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("email", {
-    header: (_) => <RenderHeading props={{ title: "Email" }} />,
+    header: (_) => <Heading props={{ title: "Email" }} />,
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("phoneNumber", {
-    header: (_) => <RenderHeading props={{ title: "Phone Number" }} />,
+    header: (_) => <Heading props={{ title: "Phone Number" }} />,
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("dateJoined", {
-    header: (_) => <RenderHeading props={{ title: "Date joined" }} />,
+    header: (_) => <Heading props={{ title: "Date joined" }} />,
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("status", {
-    header: (_) => <RenderHeading props={{ title: "Status" }} />,
+    header: (_) => <Heading props={{ title: "Status" }} />,
     cell(info) {
       switch (info.getValue()) {
         case UserStatus.active:
@@ -75,7 +75,7 @@ const columns = [
     cell(info) {
       return (
         <div>
-          <RenderActionTooltip props={{ index: info.row.index }} />
+          <ActionTooltip props={{ index: info.row.index }} />
         </div>
       );
     },
@@ -167,14 +167,54 @@ export default function UserTable() {
               </option>
             ))}
           </select>
-          <span>out of {UserStats.length}</span>
+          <span>out of {users.length}</span>
+        </div>
+
+        <div className="paginate">
+          <button
+            className={`image-wrapper ${
+              !table.getCanPreviousPage() ? "inactive" : ""
+            }`}
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
+            <Image src={Images.table.previous} alt="previous" />
+          </button>
+          {ellipses(
+            table.getPageCount(),
+            table.getState().pagination.pageIndex
+          ).map((item, index) => (
+            <div
+              key={index}
+              onClick={() => {
+                if (item !== "...") table.setPageIndex(item - 1);
+              }}
+              className={`visible-cells ${
+                table.getState().pagination.pageIndex + 1 == item
+                  ? "active"
+                  : "inactive"
+              }`}
+            >
+              {item}
+            </div>
+          ))}
+
+          <button
+            className={`image-wrapper ${
+              !table.getCanNextPage() ? "inactive" : ""
+            }`}
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
+            <Image src={Images.table.next} alt="next" />
+          </button>
         </div>
       </div>
     </div>
   );
 }
 
-function RenderHeading({ props }: { props: { title: string } }) {
+function Heading({ props }: { props: { title: string } }) {
   return (
     <div className="heading-content">
       {props.title}
@@ -185,7 +225,7 @@ function RenderHeading({ props }: { props: { title: string } }) {
   );
 }
 
-function RenderActionTooltip({ props }: { props: { index: number } }) {
+function ActionTooltip({ props }: { props: { index: number } }) {
   const [opened, setOpened] = useState(false);
   const { blacklistUser, activateUser } = useContext(
     UsersContext
@@ -240,4 +280,12 @@ function RenderActionTooltip({ props }: { props: { index: number } }) {
       </Menu.Dropdown>
     </Menu>
   );
+}
+
+function ellipses(input: number, state: number): any[] {
+  const array =
+    input - 2 <= state + 3
+      ? ["...", input - 4, input - 3, input - 2, input - 1, input]
+      : [1 + state, 2 + state, 3 + state, "...", input - 1, input];
+  return array;
 }

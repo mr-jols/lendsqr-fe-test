@@ -66,33 +66,80 @@
 
 .user-table-functions {
   margin-bottom: to-rem(70);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:to-rem(20);
+  
+
+
+  @include breakpoint-tab-small{
+    flex-direction: row;
+    justify-content: space-between;
+    gap:unset;
+
+  }
   & .expand {
     display: flex;
     gap: to-rem(10);
     align-items: center;
+  
+
+    & select {
+      outline: none;
+      border: none;
+      padding: to-rem(7) to-rem(0) to-rem(7) to-rem(12);
+      border-radius: to-rem(4);
+      width: to-rem(80);
+      background-color: color.change($primary-color, $alpha: 0.1);
+      border-right: to-rem(16) solid transparent;
+      font-weight: 500;
+    }
   }
 
-  & select {
-    border: none;
-    padding: to-rem(7) to-rem(12);
-    border-radius: to-rem(4);
-    width: to-rem(80);
-    background-color: color.change($primary-color, $alpha: 0.1);
+  & .paginate {
+    display: flex;
+    gap: 1rem;
+    .image-wrapper {
+      width: to-rem(24);
+      height: to-rem(24);
+      background-color: color.change($primary-color, $alpha: 0.1);
+      border-radius: to-rem(4);
+      padding: to-rem(5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    & .visible-cells{
+      margin-left: to-rem(10);
+      background-color: transparent;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    & .active {
+      color: $primary-color;
+    }
+
+    & .inactive {
+      opacity: 0.5;
+    }
   }
 }
 
 .action-tooltip-menu {
-  padding:to-rem(20);
+  padding: to-rem(20);
   min-width: to-rem(200);
   font-weight: 500;
-  &-item{
+  &-item {
     display: flex;
     gap: to-rem(8);
     align-items: center;
   }
 
-  &-item + &-item{
-margin-top: to-rem(10);
+  &-item + &-item {
+    margin-top: to-rem(10);
   }
 
   .menu-image-wrapper {
