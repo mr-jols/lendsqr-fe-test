@@ -14,6 +14,7 @@ export default function UserDetailsPage({
   const router = useRouter();
 
   useLayoutEffect(() => {
+    window.scrollTo(0, 0);
     if (isNaN(Number(params.id)) || Number(params.id) < 1) {
       router.push("/dashboard/users");
     }
@@ -22,7 +23,7 @@ export default function UserDetailsPage({
   return (
     <div className="user-details">
       <UserDetailBackButton />
-      <UserDetailHeaderWithActions  props={{ id: Number(params.id) }} />
+      <UserDetailHeaderWithActions props={{ id: Number(params.id) }} />
       <UserDetailIntroSection props={{ id: Number(params.id) }} />
       <UserDetailBodySection props={{ id: Number(params.id) }} />
     </div>

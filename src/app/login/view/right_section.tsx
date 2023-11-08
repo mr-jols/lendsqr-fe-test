@@ -46,7 +46,6 @@ function LoginForm() {
         router.push("/dashboard/users");
         dispatch.handleButtonStateChange({
           ...state.sumbitButtonState,
-          isLoading: false,
         });
       }, 1000);
     }

@@ -11,8 +11,7 @@ export default function UserDetailLayout({
   const { users ,saveUsers} = useContext(UsersContext) as UsersContextType;
   const router = useRouter();
 
-  useLayoutEffect(() => {
-    window.scrollTo(0,0);
+  useEffect(() => {
     const storedData = localStorage.getItem("users");
     if (storedData) {
       saveUsers(JSON.parse(storedData));

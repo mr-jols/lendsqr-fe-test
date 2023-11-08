@@ -13,6 +13,10 @@ export default function UsersPage() {
   const { users, saveUsers } = useContext(UsersContext) as UsersContextType;
   const [toggle, handleToggle] = useToggle();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   useLayoutEffect(() => {
     const storedData = localStorage.getItem("users");
     if (storedData) {
