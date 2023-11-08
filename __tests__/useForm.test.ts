@@ -38,7 +38,7 @@ describe("it ensures validity of form state", () => {
   });
 
   it("ensures validity of initial State", () => {
-    expect(initialFormState(2)).toEqual(<FormStateProps>{
+    expect(initialFormState([elements[0],elements[1]])).toEqual(<FormStateProps>{
       errors: ["", ""],
       isDirty: [false, false],
       values: ["", ""],
@@ -50,8 +50,18 @@ describe("it ensures validity of form state", () => {
     });
   });
 
+  it("checks that initialState of a form element is set",()=>{
+    expect(initialFormState([{
+       errorMessages:"",
+       index:0,
+       shouldValidate:false,
+       type:FormElementType.text,
+       initialValue:"lendsqr"
+    }]).values).toEqual(["lendsqr"]);
+  })
+
   it("updates form value", () => {
-    const state = initialFormState(2);
+    const state = initialFormState([elements[0],elements[1]]);
     expect(updateValue(state, { index: 0, value: "updated" }).values).toEqual([
       "updated",
       "",
@@ -59,7 +69,7 @@ describe("it ensures validity of form state", () => {
   });
 
   it("updates form errors", () => {
-    const state = initialFormState(2);
+    const state = initialFormState([elements[0],elements[1]]);
     const errorMessage = "Something went wrong";
     expect(
       updateErrors(state, { index: 0, value: errorMessage }).errors
@@ -67,7 +77,7 @@ describe("it ensures validity of form state", () => {
   });
 
   it("updates form is dirty Fields", () => {
-    const state = initialFormState(2);
+    const state = initialFormState([elements[0],elements[1]]);
     expect(updateIsDirty(state, { index: 0, value: true }).isDirty).toEqual([
       true,
       false,
@@ -91,7 +101,7 @@ describe("it ensures validity of form state", () => {
   });
 
   it("validates a form element", () => {
-    let initialState = initialFormState(elements.length);
+    let initialState = initialFormState(elements);
     expect(validateFormElement(initialState, elements[0]).errors).toEqual([
       elements[0].errorMessages[0],
       "",
@@ -116,7 +126,7 @@ describe("it ensures validity of form state", () => {
   });
 
   it("validates all form elements", () => {
-    const initialState = initialFormState(elements.length);
+    const initialState = initialFormState(elements);
     expect(validateFormElements(initialState, elements).errors).toEqual([
       elements[0].errorMessages[0],
       elements[1].errorMessages,
