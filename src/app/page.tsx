@@ -6,8 +6,8 @@ export default function AppPage() {
   const router = useRouter();
 
   useLayoutEffect(() => {
-    const storedData = localStorage.getItem("users");
-    if (!storedData) {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    if (!isLoggedIn) {
       router.push("/login");
     } else {
       router.push("/dashboard/users");
