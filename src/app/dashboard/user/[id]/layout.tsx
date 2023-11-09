@@ -8,7 +8,7 @@ export default function UserDetailLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { users ,saveUsers} = useContext(UsersContext) as UsersContextType;
+  const { saveUsers} = useContext(UsersContext) as UsersContextType;
   const router = useRouter();
 
   useEffect(() => {

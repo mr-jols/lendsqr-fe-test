@@ -1,12 +1,17 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 
 export default function AppPage() {
   const router = useRouter();
 
-  useEffect(() => {
-    router.push("/login");
+  useLayoutEffect(() => {
+    const storedData = localStorage.getItem("users");
+    if (!storedData) {
+      router.push("/login");
+    } else {
+      router.push("/dashboard/users");
+    }
   }, []);
 
   return <></>;

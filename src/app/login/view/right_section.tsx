@@ -22,6 +22,7 @@ export default function RightSection() {
 }
 
 function LoginForm() {
+  //This initilizes form state
   const elements: FormElementConfigProps[] = [
     {
       errorMessages: ["Your Email is Requried", "Please enter a valid email"],
@@ -43,6 +44,7 @@ function LoginForm() {
     if (state.sumbitButtonState.isLoading) {
       //mock api load state
       setTimeout(() => {
+        localStorage.setItem("isLoggedIn", "true");
         router.push("/dashboard/users");
         dispatch.handleButtonStateChange({
           ...state.sumbitButtonState,

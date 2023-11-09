@@ -1,5 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
+//This custom hook manages form state
 
 export enum FormElementType {
   email,

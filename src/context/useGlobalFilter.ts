@@ -1,4 +1,3 @@
-import { FormHookOutputProps } from "@/hooks/useForm";
 import { createContext, useState } from "react";
 
 export const GlobalFilterContext =

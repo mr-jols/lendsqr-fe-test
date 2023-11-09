@@ -20,7 +20,7 @@ export default function HeadingFilters({
   const { state, dispatch } = useContext(
     FilterFormContext
   ) as FormHookOutputProps;
-  const { globalFilter,setGlobalFilter} = useContext(
+  const { setGlobalFilter} = useContext(
     GlobalFilterContext
   ) as GlobalFilterContextType;
 
@@ -37,7 +37,7 @@ export default function HeadingFilters({
       }
     }
   }
-  
+
   useEffect(() => {
     document.addEventListener("mousedown", handleOutsideClick);
     return () => {
