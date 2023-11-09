@@ -1,5 +1,4 @@
 import "@/styles/main.scss";
-import "@mantine/core/styles.css";
 import Head from "next/head";
 import Providers from "./providers";
 import type { Metadata } from "next";

@@ -1,5 +1,4 @@
 "use client";
-import "@/styles/main.scss";
 import { MantineProvider } from "@mantine/core";
 import useUsers, { UsersContext } from "@/context/useUsers";
 import "@mantine/core/styles.css";
