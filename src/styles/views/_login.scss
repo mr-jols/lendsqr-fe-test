@@ -58,7 +58,7 @@
 
         @include breakpoint-tab-small {
           width: unset;
-          max-width: to-rem(490);
+          max-width: 80%;
         }
 
         & > h1 {
