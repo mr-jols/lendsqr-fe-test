@@ -1,0 +1,83 @@
+@use "../config" as *;
+
+.header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background-color: $neutral-color;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 3px 0px 20px 0px rgba(0, 0, 0, 0.04);
+  padding: to-rem(20);
+
+  .left-section {
+    display: flex;
+    width: 65%;
+    justify-content: space-between;
+
+    @include breakpoint-laptop {
+      width: 52%;
+    }
+  }
+
+  @include breakpoint-tab-small {
+    padding: to-rem(30) to-rem(60) to-rem(30) to-rem(30);
+  }
+
+  & .search-input {
+    min-width: to-rem(450);
+    display: none;
+
+    @include breakpoint-tab {
+      display: block;
+    }
+  }
+
+  .header-items {
+    align-items: center;
+    font-size: to-rem(16);
+    display: none;
+
+    @include breakpoint-tab {
+      display: inline-flex;
+    }
+
+    & .docs {
+      text-decoration: underline;
+    }
+
+    & .user-name {
+      font-weight: 600;
+    }
+
+    & .dropdown-icon-wrapper {
+      width: to-rem(20);
+      height: to-rem(20);
+    }
+
+    & .avatar-wrapper {
+      width: to-rem(48);
+      height: to-rem(48);
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: to-rem(10);
+    }
+
+    & .notification-icon-wrapper {
+      width: to-rem(26);
+      margin-left: to-rem(47);
+      margin-right: to-rem(30);
+    }
+  }
+
+  .hamburger-menu {
+    @include breakpoint-tab {
+      display: none;
+    }
+
+    & .hamburger-wrapper {
+      width: to-rem(30);
+    }
+  }
+}

@@ -1,0 +1,99 @@
+@use "../config" as *;
+
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+
+  & .positioned-wrapper {
+    position: absolute;
+    top: to-rem(106);
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    @include breakpoint-tab-small {
+      transform: unset;
+      left: to-rem(97);
+    }
+  }
+
+  & .login-section {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: to-rem(140) 0;
+
+    @include breakpoint-tab-small {
+      width: 50%;
+    }
+
+    &--left {
+      padding-inline: to-rem(0);
+      display: none;
+
+      @include breakpoint-laptop {
+        padding-inline: to-rem(67);
+      }
+
+      @include breakpoint-tab-small {
+        display: flex;
+      }
+    }
+
+    &--right {
+      padding-inline: to-rem(20);
+      box-shadow: 0 15px 90px 0 rgba(0, 0, 0, 0.03);
+
+      @include breakpoint-tab-small {
+        padding-inline: to-rem(40);
+      }
+
+      @include breakpoint-laptop {
+        padding-inline: to-rem(100);
+      }
+
+      & > div {
+        width: 100%;
+
+        @include breakpoint-tab-small {
+          width: unset;
+          max-width: 80%;
+        }
+
+        & > h1 {
+          font-size: to-rem(40);
+          color: $primary-color;
+          font-weight: bold;
+          letter-spacing: to-rem(-1.6);
+          line-height: 60%;
+          font-family: $font-family--Avenir-Bold;
+        }
+
+        & > p {
+          color: $on-primary-color;
+          font-size: to-rem(20);
+          font-family: $font-family--Avenir;
+        }
+      }
+
+      & .login-form {
+        margin-top: to-rem(60);
+
+        & > * + * {
+          margin-top: to-rem(24);
+        }
+
+        & > :last-child {
+          margin-top: to-rem(30);
+        }
+      }
+    }
+  }
+
+  & .login-illustration {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}

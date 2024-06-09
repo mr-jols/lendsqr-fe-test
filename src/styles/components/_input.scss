@@ -1,0 +1,128 @@
+@use "../config/" as *;
+@use "sass:color";
+
+input,
+.select {
+  width: 100%;
+  padding: 1rem;
+  background-color: $neutral-color;
+  border: 2px solid color.change($on-primary-color, $alpha: 0.15);
+  border-radius: to-rem(5);
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+  & * {
+    font-family: $font-family--Avenir;
+  }
+
+  &[type="search"] {
+    border: 1px solid color.change($primary-color, $alpha: 0.2);
+    border-radius: to-rem(9);
+    padding: to-rem(12) to-rem(60) to-rem(12) to-rem(20);
+  }
+
+  &[type="password"] {
+    padding-right: 4rem;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: rgba(57, 205, 204, 0.25) 0px 0px 0px 0.2rem;
+    border: 2px solid rgb(159, 231, 230);
+  }
+
+  &::placeholder {
+    color: color.change($on-primary-color, $alpha: 0.6);
+  }
+}
+
+label {
+  display: block;
+  margin-bottom: to-rem(6);
+  font-weight: 500;
+}
+
+.input-error {
+  color: $accent-one-color;
+  font-size: 0.7rem;
+  margin-top: 0.5rem;
+}
+
+.relative-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.visibility-toggler {
+  position: absolute;
+  margin-right: 1rem;
+  font-size: to-rem(12);
+  color: $secondary-color;
+  cursor: default;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.forgot-password {
+  text-transform: uppercase;
+  font-size: to-rem(12);
+  font-weight: 600;
+  margin-top: to-rem(24);
+  letter-spacing: to-rem(1.2);
+  color: $secondary-color;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: default;
+  }
+}
+
+.submit-button {
+  border-radius: to-rem(8);
+  width: 100%;
+  padding: to-rem(16) 0;
+  display: block;
+  background-color: $neutral-color;
+  font-weight: bold;
+  transition: all 0.15s;
+
+  &--outlined {
+    border: 1px solid;
+  }
+
+  &--green {
+    border: none;
+    background-color: $secondary-color;
+    color: $neutral-color;
+
+    &:focus {
+      box-shadow: rgba(53, 180, 180, 0.5) 0px 0px 0px 0.2rem;
+    }
+
+    &:hover {
+      background-color: rgb(45, 179, 178);
+      border-color: rgb(43, 168, 168);
+    }
+  }
+}
+
+.search-input {
+  position: relative;
+
+  & .icon-wrapper {
+    width: to-rem(14);
+  }
+
+  & > button {
+    background-color: $secondary-color;
+    padding-inline: to-rem(21);
+    position: absolute;
+    top: 0;
+    bottom: to-rem(2);
+    right: 0;
+    border: unset;
+    border-top-right-radius: to-rem(8);
+    border-bottom-right-radius: to-rem(8);
+  }
+}

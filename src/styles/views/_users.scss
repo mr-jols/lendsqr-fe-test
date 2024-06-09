@@ -1,0 +1,72 @@
+@use "../config" as *;
+@use "sass:color";
+
+.user-stats {
+  &-cards {
+    margin-top: to-rem(40);
+    display: grid;
+    gap: to-rem(26);
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    grid-template-rows: auto;
+    margin-bottom: to-rem(40);
+
+    @include breakpoint-tab-small {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    }
+
+    @include breakpoint-laptop {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  &-card {
+    box-shadow: 3px 5px 20px 0px rgba(0, 0, 0, 0.04);
+    border-radius: to-rem(4);
+    border: 1px solid rgba(33, 63, 125, 0.06);
+    padding-inline: to-rem(30);
+    padding-top: to-rem(20);
+    padding-bottom: to-rem(30);
+
+    &-icon {
+      width: to-rem(40);
+      height: to-rem(40);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: color.change($accent-four-color, $alpha: 0.1);
+
+      &--variant-one {
+        background-color: color.change($accent-five-color, $alpha: 0.1);
+      }
+
+      &--variant-two {
+        background-color: color.change($accent-six-color, $alpha: 0.1);
+      }
+
+      &--variant-three {
+        background-color: color.change($accent-seven-color, $alpha: 0.1);
+      }
+
+      & .image-wrapper {
+        width: to-rem(24);
+        height: to-rem(24);
+      }
+    }
+
+    &-title {
+      text-transform: uppercase;
+      font-weight: 500;
+      font-size: to-rem(14);
+      margin-top: to-rem(14);
+      margin-bottom: to-rem(10);
+    }
+
+    &-content {
+      font-size: to-rem(24);
+      font-weight: 600;
+      color: $primary-color;
+    }
+  }
+}

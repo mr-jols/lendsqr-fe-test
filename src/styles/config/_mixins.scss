@@ -1,0 +1,8 @@
+@mixin border-red {
+    @include border(red);
+}
+
+@mixin border($val) {
+  border: 1px solid $val;
+}
+

@@ -1,0 +1,27 @@
+@use "../config/" as *;
+@use "sass:color";
+
+.chip {
+  display: inline-block;
+  padding: to-rem(6.5) to-rem(18);
+  border-radius: to-rem(100);
+
+  &--active {
+    color: $accent-three-color;
+    background-color: color.change($accent-three-color, $alpha: 0.06);
+  }
+
+  &--inactive {
+    background-color: color.change($on-primary-color, $alpha: 0.06);
+  }
+
+  &--blacklisted {
+    color: $accent-one-color;
+    background-color: color.change($accent-one-color, $alpha: 0.06);
+  }
+
+  &--pending {
+    color: $accent-two-color;
+    background-color: color.change($accent-two-color, $alpha: 0.06);
+  }
+}

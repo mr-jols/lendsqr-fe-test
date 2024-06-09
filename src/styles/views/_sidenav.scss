@@ -1,0 +1,78 @@
+@use "../config" as *;
+@use "sass:color";
+
+.nav {
+  padding-top: to-rem(60);
+
+  @include breakpoint-tab-small {
+    padding-top: to-rem(100);
+  }
+
+  &-footer {
+    font-size: to-rem(12);
+    padding-inline: to-rem(30);
+    padding-bottom: to-rem(20);
+    color: $primary-color;
+  }
+}
+
+.nav-section {
+  margin-top: to-rem(40);
+
+  &--smaller-margin {
+    margin-top: to-rem(30);
+  }
+
+  &--smallest-margin {
+    margin-top: to-rem(10);
+  }
+
+  &--with-divider {
+    padding-top: to-rem(8);
+    padding-bottom: to-rem(40);
+    border-top: to-rem(1) solid color.change($primary-color, $alpha: 0.1);
+  }
+
+  &-title {
+    text-transform: uppercase;
+    font-size: to-rem(12);
+    font-weight: 500;
+    padding-inline: to-rem(30);
+  }
+
+  & li {
+    margin-top: to-rem(10);
+  }
+}
+
+.nav-link {
+  padding: to-rem(10) to-rem(30);
+  display: block;
+  font-size: to-rem(17);
+  opacity: 0.5;
+
+  &--active {
+    border-left: to-rem(3) solid $secondary-color;
+    background-color: color.change($secondary-color, $alpha: 0.06);
+    opacity: 1;
+  }
+
+  &--prominent {
+    opacity: 1;
+  }
+
+  & p {
+    color: $primary-color;
+  }
+
+  & > div {
+    display: flex;
+    align-items: center;
+    gap: to-rem(10);
+  }
+
+  &-icon-wrapper {
+    width: to-rem(16);
+    height: to-rem(24);
+  }
+}

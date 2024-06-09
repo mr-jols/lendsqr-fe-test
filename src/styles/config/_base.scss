@@ -1,0 +1,89 @@
+@use "colors" as *;
+@use "mixins" as *;
+@use "functions" as *;
+@use "typography" as *;
+@use "sass:color";
+@use "breakpoints" as *;
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap');
+
+
+//general styles
+
+html {
+  font-size: 14px;
+ 
+  @include breakpoint-desktop {
+    font-size: 1vw;
+  }
+}
+
+* {
+  color: $on-primary-color;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box !important;
+}
+body{
+  font-family:'Work Sans', $font-family--Avenir;
+}
+a {
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  background: $neutral-color;
+}
+
+.giveborder {
+  border: 1px solid red;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.inline {
+  display: inline;
+}
+
+.logo-icon-wrapper {
+  width: to-rem(173.765);
+
+  &--smaller {
+    width: to-rem(144);
+  }
+
+  & img {
+    width: 100%;
+    object-fit: contain;
+    height: 100%;
+  }
+}
+
+img {
+  width: 100%;
+  object-fit: contain;
+  height: 100%;
+}
+
+button{
+  transition: scale 0.15s ease-out;
+  &:active{
+    scale:0.95;
+  }
+}
+
+@media screen and (max-width:500px) { 
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+

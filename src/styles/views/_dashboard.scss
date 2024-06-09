@@ -1,0 +1,58 @@
+@use "../config" as *;
+
+.dashboard {
+    height: 100vh;
+    overflow: hidden;
+
+    &-title {
+      font-size: to-rem(24);
+      margin: 0;
+      font-weight: 500;
+      color: $primary-color;
+    }
+
+  &-content-wrapper {
+    display: flex;
+    background-color: $neutral-two-color;
+    min-height: 100vh;
+
+    & .nav-wrapper {
+      display: none;
+      background-color: $neutral-color;
+
+      @include breakpoint-tab {
+        display: block;
+        width: 18%;
+        max-height: 100vh;
+        overflow-y: scroll;
+        box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.04);
+
+        &::-webkit-scrollbar {
+          width: 0px;
+        }
+      }
+    }
+
+    & main {
+      flex: 1;
+      overflow-y: scroll;
+      max-height: 100vh;
+      padding-inline: to-rem(20);
+      padding-top: to-rem(110);
+      padding-bottom: to-rem(50);
+
+      &::-webkit-scrollbar {
+        width: 0px;
+      }
+
+      @include breakpoint-tab-small {
+        padding-top: to-rem(140);
+        padding-inline: to-rem(60);
+      }
+
+      @include breakpoint-tab {
+        padding-top: to-rem(160);
+      }
+    }
+  }
+}

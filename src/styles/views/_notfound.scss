@@ -1,0 +1,24 @@
+@use "../config" as *;
+
+.not-found{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    &>*{
+        display: flex;
+        flex-direction: column;
+        gap:to-rem(20);
+        max-width:350px;
+        padding-inline: to-rem(20);
+    }
+
+    h1{
+        font-size: to-rem(32);
+        font-weight: 600;
+        color:$primary-color;
+        margin:0;
+    }
+}

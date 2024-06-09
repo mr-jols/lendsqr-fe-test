@@ -1,0 +1,16 @@
+@font-face {
+  font-family: "Avenir-Bold";
+  src: url("/public/fonts/AvenirNextLTPro-Bold.otf");
+}
+
+@font-face {
+  font-family: "Avenir";
+  src: url("/public/fonts/AvenirNextLTPro-Regular.otf");
+}
+
+$font-family--Avenir: "Avenir", system-ui, -apple-system, "Segoe UI", roboto,
+  ubuntu, cantarell, "Noto Sans", sans-serif;
+  
+  $font-family--Avenir-Bold: "Avenir-Bold", system-ui, -apple-system, "Segoe UI", roboto,
+  ubuntu, cantarell, "Noto Sans", sans-serif;
+
