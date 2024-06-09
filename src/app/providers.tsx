@@ -36,7 +36,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     >
       <FilterFormContext.Provider value={formState}>
         <GlobalFilterContext.Provider value={globalFilterState}>
-            <MantineProvider>{children}</MantineProvider>
+          <MantineProvider>{children}</MantineProvider>
         </GlobalFilterContext.Provider>
       </FilterFormContext.Provider>
     </UsersContext.Provider>

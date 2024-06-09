@@ -18,9 +18,9 @@ export default function RootLayout({
       <Head>
         <link rel="icon" href="/favicon.icon"></link>
       </Head>
-      <Providers>
-        <body>{children}</body>
-      </Providers>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
