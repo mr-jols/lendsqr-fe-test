@@ -1,4 +1,3 @@
-"use client";
 import { InputFieldBuilder } from "@/presentation/components/input";
 import SubmitButtonBuilder from "@/presentation/components/input/button";
 import { PasswordInputFieldBuilder } from "@/presentation/components/input/password";
@@ -25,15 +24,15 @@ function LoginForm() {
   //This initilizes form state
   const elements: FormElementConfigProps[] = [
     {
+      type: FormElementType.email,
       errorMessages: ["Your Email is Requried", "Please enter a valid email"],
       shouldValidate: true,
-      type: FormElementType.email,
       index: 0,
     },
     {
+      type: FormElementType.password,
       errorMessages: "Your password is required",
       shouldValidate: true,
-      type: FormElementType.password,
       index: 1,
     },
   ];
@@ -42,7 +41,7 @@ function LoginForm() {
 
   useEffect(() => {
     if (state.sumbitButtonState.isLoading) {
-      //mock api load state
+      //mock api load time
       setTimeout(() => {
         localStorage.setItem("isLoggedIn", "true");
         router.push("/dashboard/users");

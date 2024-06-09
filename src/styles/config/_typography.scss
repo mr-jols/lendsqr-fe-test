@@ -1,16 +1,18 @@
 @font-face {
-  font-family: "Avenir-Bold";
-  src: url("/public/fonts/AvenirNextLTPro-Bold.otf");
+  font-family: "Avenir";
+  font-weight: 700;
+  src: url("../../../public/fonts/avenir_bold.otf");
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Avenir";
-  src: url("/public/fonts/AvenirNextLTPro-Regular.otf");
+  font-weight: 400;
+  src: url("../../../public/fonts/avenir_regular.otf");
+  font-style: normal;
+  font-display: swap;
 }
 
 $font-family--Avenir: "Avenir", system-ui, -apple-system, "Segoe UI", roboto,
   ubuntu, cantarell, "Noto Sans", sans-serif;
-  
-  $font-family--Avenir-Bold: "Avenir-Bold", system-ui, -apple-system, "Segoe UI", roboto,
-  ubuntu, cantarell, "Noto Sans", sans-serif;
-

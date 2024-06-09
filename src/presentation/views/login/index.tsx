@@ -1,4 +1,3 @@
-"use client";
 import Images from "@/utils/images";
 import Image from "next/image";
 import LeftSection from "./left_section";

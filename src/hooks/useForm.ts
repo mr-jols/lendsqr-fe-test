@@ -95,7 +95,7 @@ export function initialFormState(
   return {
     errors: new Array(values.length).fill(""),
     isDirty: new Array(values.length).fill(false),
-    values: values.map((item, index) => item?.initialValue ?? ""),
+    values: values.map((item) => item?.initialValue ?? ""),
     sumbitButtonState: {
       isDisabled: false,
       isLoading: false,
