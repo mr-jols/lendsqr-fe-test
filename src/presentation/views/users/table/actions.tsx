@@ -1,5 +1,5 @@
 import LinkBuilder from "@/presentation/components/link";
-import { UsersContext, UsersContextType } from "@/context/useUsers";
+import { UsersContext, UsersContextType } from "@/hooks/useUsers";
 import Images from "@/utils/images";
 import { Menu } from "@mantine/core";
 import Image from "next/image";

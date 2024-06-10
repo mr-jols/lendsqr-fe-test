@@ -1,5 +1,5 @@
 "use client";
-import { UsersContext, UsersContextType } from "@/context/useUsers";
+import { UsersContext, UsersContextType } from "@/hooks/useUsers";
 import UsersTable from "../../../presentation/views/users/table";
 import { useContext, useEffect } from "react";
 import UsersStats from "../../../presentation/views/users/stats";

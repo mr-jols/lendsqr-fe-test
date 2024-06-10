@@ -1,4 +1,4 @@
-import { UsersContext, UsersContextType } from "@/context/useUsers";
+import { UsersContext, UsersContextType } from "@/hooks/useUsers";
 import { useContext, useMemo } from "react";
 
 interface SectionItemProps {

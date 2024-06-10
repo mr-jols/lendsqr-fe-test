@@ -6,7 +6,7 @@ import UserDetailHeaderWithActions from "../../../../presentation/views/user/hea
 import { useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import useToggle from "@/hooks/useToggle";
-import { UsersContext, UsersContextType } from "@/context/useUsers";
+import { UsersContext, UsersContextType } from "@/hooks/useUsers";
 
 export default function UserDetailsPage({
   params,

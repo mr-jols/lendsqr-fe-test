@@ -1,8 +1,9 @@
-import { UserStatus, UsersContext, UsersContextType } from "@/context/useUsers";
+import { UsersContext, UsersContextType } from "@/hooks/useUsers";
 import Images from "@/utils/images";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { useContext, useMemo } from "react";
 import UsersStatsCardItem from "./item";
+import { UserStatus } from "@/models/domain/user";
 
 export interface UsersStatsCardProps {
   icon: StaticImport;

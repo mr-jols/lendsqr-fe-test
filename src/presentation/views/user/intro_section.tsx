@@ -1,5 +1,5 @@
 import RatingBuilder from "@/presentation/components/rating";
-import { UsersContext, UsersContextType } from "@/context/useUsers";
+import { UsersContext, UsersContextType } from "@/hooks/useUsers";
 import Image from "next/image";
 import { useContext } from "react";
 

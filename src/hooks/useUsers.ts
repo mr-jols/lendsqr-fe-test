@@ -1,37 +1,26 @@
-import { UserResponse } from "@/models/response/user";
+import { User, UserStatus } from "@/models/domain/user";
 import { createContext, useEffect, useState } from "react";
 
-export enum UserStatus {
-  active,
-  inactive,
-  blacklisted,
-  pending,
-}
-
-export interface UserState extends Omit<UserResponse, "maritalstatus"> {
-  status: UserStatus;
-  maritalstatus: string;
-}
-
 export interface UsersContextType {
-  users: UserState[];
+  users: User[];
   blacklistUser(id: number): void;
   activateUser(id: number): void;
-  saveUsers(users: UserState[]): void;
+  saveUsers(users: User[]): void;
 }
 
 export const UsersContext = createContext<UsersContextType | null>(null);
 
 export default function useUsers(): UsersContextType {
-  const [users, setUsers] = useState<UserState[] | []>([]);
+  const [users, setUsers] = useState<User[] | []>([]);
 
   useEffect(() => {
+    //stores users in local storage once updated
     if (users.length > 0) {
       localStorage.setItem("users", JSON.stringify(users));
     }
   }, [users]);
 
-  function saveUsers(users: UserState[]) {
+  function saveUsers(users: User[]) {
     setUsers(users);
   }
 

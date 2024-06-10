@@ -1,6 +1,6 @@
 "use client";
 import { MantineProvider } from "@mantine/core";
-import useUsers, { UsersContext } from "@/context/useUsers";
+import useUsers, { UsersContext } from "@/hooks/useUsers";
 import "@mantine/core/styles.css";
 import useForm, { FormElementType } from "@/hooks/useForm";
 import { FilterFormContext } from "@/context/useFormFilter";

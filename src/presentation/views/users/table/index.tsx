@@ -17,13 +17,14 @@ import {
   InactiveChipBuilder,
   PendingChipBuilder,
 } from "@/presentation/components/chip";
-import { UserStatus, UsersContext, UsersContextType } from "@/context/useUsers";
+import {UsersContext, UsersContextType } from "@/hooks/useUsers";
 import { ActionTooltip } from "./actions";
 import HeadingFilters from "./filters";
 import {
   GlobalFilterContext,
   GlobalFilterContextType,
 } from "@/context/useGlobalFilter";
+import { UserStatus } from "@/models/domain/user";
 
 interface UserTableProps {
   organization: string;
@@ -39,27 +40,27 @@ const columnHelper = createColumnHelper<UserTableProps>();
 
 const columns = [
   columnHelper.accessor("organization", {
-    header: (info) => <HeadingFilters props={{ title: "Organization" }} />,
+    header: (_) => <HeadingFilters props={{ title: "Organization" }} />,
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("username", {
-    header: (info) => <HeadingFilters props={{ title: "Username" }} />,
+    header: (_) => <HeadingFilters props={{ title: "Username" }} />,
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("email", {
-    header: (info) => <HeadingFilters props={{ title: "Email" }} />,
+    header: (_) => <HeadingFilters props={{ title: "Email" }} />,
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("phoneNumber", {
-    header: (info) => <HeadingFilters props={{ title: "Phone Number" }} />,
+    header: (_) => <HeadingFilters props={{ title: "Phone Number" }} />,
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("dateJoined", {
-    header: (info) => <HeadingFilters props={{ title: "Date joined" }} />,
+    header: (_) => <HeadingFilters props={{ title: "Date joined" }} />,
     cell: (info) => info.getValue(),
   }),
   columnHelper.accessor("status", {
-    header: (info) => <HeadingFilters props={{ title: "Status" }} />,
+    header: (_) => <HeadingFilters props={{ title: "Status" }} />,
     cell(info) {
       switch (info.getValue()) {
         case UserStatus.active:

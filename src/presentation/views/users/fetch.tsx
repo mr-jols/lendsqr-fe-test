@@ -1,4 +1,4 @@
-import { UsersContext, UsersContextType } from "@/context/useUsers";
+import { UsersContext, UsersContextType } from "@/hooks/useUsers";
 import { useFetchQuery } from "@/hooks/useFetchQuery";
 import { UsersResponse, toDomain } from "@/models/response/user";
 import { BASE_URL } from "@/utils/constansts";
