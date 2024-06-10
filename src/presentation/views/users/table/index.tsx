@@ -17,14 +17,15 @@ import {
   InactiveChipBuilder,
   PendingChipBuilder,
 } from "@/presentation/components/chip";
-import {UsersContext, UsersContextType } from "@/hooks/useUsers";
+import { UsersContext, UsersContextType } from "@/hooks/useUsers";
 import { ActionTooltip } from "./actions";
 import HeadingFilters from "./filters";
-import {
-  GlobalFilterContext,
-  GlobalFilterContextType,
-} from "@/context/useGlobalFilter";
 import { UserStatus } from "@/models/domain/user";
+import {
+  TableFilterContext,
+  TableFilterContextType,
+  tableInitialState,
+} from "@/hooks/useTableFilter";
 
 interface UserTableProps {
   organization: string;
@@ -89,23 +90,43 @@ const columns = [
 export default function UsersTable() {
   const { users } = useContext(UsersContext) as UsersContextType;
   const [expanded, setExpanded] = useState<ExpandedState>({});
-  const { globalFilter, setGlobalFilter } = useContext(
-    GlobalFilterContext
-  ) as GlobalFilterContextType;
+  const { state: filterState } = useContext(
+    TableFilterContext
+  ) as TableFilterContextType;
 
   const data = useMemo(
     () => [
-      ...users.map((item) => ({
-        organization: item.organization,
-        username: item.fullname,
-        email: item.email,
-        phoneNumber: item.phone_number,
-        dateJoined: item.date_joined,
-        status: item.status,
-        action: "",
-      })),
+      ...users
+        .filter((item) => {
+          if (
+            (item.organization == filterState.organization ||
+              filterState.organization == tableInitialState.organization) &&
+            (item.username.toLowerCase().includes(filterState.username.toLowerCase()) ||
+              filterState.username == tableInitialState.username) &&
+            (item.email == filterState.email ||
+              filterState.email == tableInitialState.email) &&
+            (item.phone_number == filterState.phoneNumber ||
+              filterState.phoneNumber == tableInitialState.phoneNumber) &&
+            (item.date_joined == filterState.date ||
+              filterState.date == tableInitialState.date) &&
+            (item.status == filterState.status ||
+              filterState.status == tableInitialState.status)
+          )
+            return true;
+
+          return false;
+        })
+        .map((item) => ({
+          organization: item.organization,
+          username: item.fullname,
+          email: item.email,
+          phoneNumber: item.phone_number,
+          dateJoined: item.date_joined,
+          status: item.status,
+          action: "",
+        })),
     ],
-    [users]
+    [users, filterState]
   );
 
   const table = useReactTable({
@@ -115,10 +136,8 @@ export default function UsersTable() {
     getCoreRowModel: getCoreRowModel(),
     state: {
       expanded,
-      globalFilter,
     },
     onExpandedChange: setExpanded,
-    onGlobalFilterChange: setGlobalFilter,
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getExpandedRowModel: getExpandedRowModel(),

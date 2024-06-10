@@ -10,6 +10,7 @@
   padding-top: to-rem(30);
   padding-bottom: to-rem(39);
   margin-bottom: to-rem(20);
+  min-height: to-rem(400);
 
   @include breakpoint-tab-small {
     margin-inline: unset;

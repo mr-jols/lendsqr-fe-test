@@ -1,14 +1,17 @@
 import { InputFieldBuilder } from "@/presentation/components/input";
 import { SelectInputFieldBuilder } from "@/presentation/components/input/select";
 import { FilterFormContext } from "@/context/useFormFilter";
-import {
-  GlobalFilterContext,
-  GlobalFilterContextType,
-} from "@/context/useGlobalFilter";
 import { FormElementType, FormHookOutputProps } from "@/hooks/useForm";
 import Images from "@/utils/images";
 import Image from "next/image";
 import { useContext, useEffect, useRef, useState } from "react";
+import {
+  TableFilterContext,
+  TableFilterContextType,
+} from "@/hooks/useTableFilter";
+import { UserStatus, stringToUserStatus } from "@/models/domain/user";
+import { formatDate } from "@/utils/functions";
+import { UsersContext, UsersContextType } from "@/hooks/useUsers";
 
 export default function HeadingFilters({
   props,
@@ -20,9 +23,10 @@ export default function HeadingFilters({
   const { state, dispatch } = useContext(
     FilterFormContext
   ) as FormHookOutputProps;
-  const { setGlobalFilter} = useContext(
-    GlobalFilterContext
-  ) as GlobalFilterContextType;
+  const { resetState, setState } = useContext(
+    TableFilterContext
+  ) as TableFilterContextType;
+  const { users } = useContext(UsersContext) as UsersContextType;
 
   function handleOutsideClick(event: MouseEvent): void {
     if (modalRef.current) {
@@ -69,7 +73,9 @@ export default function HeadingFilters({
                     index: 0,
                     value: e,
                   }),
-                options: ["lendsqr", "irorun"],
+                options: ["All"].concat(
+                  Array.from(new Set(users.map((item) => item.organization)))
+                ),
                 value: state.values[0],
                 type: FormElementType.select,
               }}
@@ -144,21 +150,34 @@ export default function HeadingFilters({
                     index: 5,
                     value: e,
                   }),
-                options: ["active", "pending", "blacklisted", "inactive"],
+                options: ["All"].concat(Object.values(UserStatus)),
                 value: state.values[5],
                 type: FormElementType.select,
               }}
             />
 
             <div className="buttons">
-              <button className="submit-button submit-button--outlined" onClick={
-                ()=> setGlobalFilter("")
-              }>
+              <button
+                className="submit-button submit-button--outlined"
+                onClick={() => resetState()}
+              >
                 Reset
               </button>
-              <button className="submit-button submit-button--green" onClick={()=>{
-                setGlobalFilter(state.values[0])
-              }}>
+              <button
+                className="submit-button submit-button--green"
+                onClick={() => {
+                  setState({
+                    organization: state.values[0],
+                    username: state.values[1],
+                    email: state.values[2],
+                    date: Boolean(state.values[3])
+                      ? formatDate(state.values[3])
+                      : "",
+                    phoneNumber: state.values[4],
+                    status: stringToUserStatus(state.values[5]),
+                  });
+                }}
+              >
                 Filter
               </button>
             </div>

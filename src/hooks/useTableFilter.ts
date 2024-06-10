@@ -1,17 +1,42 @@
-import { createContext } from "react";
-import { UserStatus } from "./useUsers";
+import { UserStatus } from "@/models/domain/user";
+import { createContext, useEffect, useState } from "react";
 
-export interface UseTableFilter {
+interface TableFilter {
   organization: string;
   username: string;
   email: string;
   date: string;
   phoneNumber: string;
-  status: UserStatus;
+  status: UserStatus | null;
 }
 
-export const TableFilterContext = createContext<UseTableFilter | null>(null);
+export interface TableFilterContextType {
+  state: TableFilter;
+  setState(state: TableFilter): void;
+  resetState(): void;
+}
 
-export default function useTableFilter(){
+export const TableFilterContext = createContext<TableFilterContextType | null>(
+  null
+);
+
+export const tableInitialState: TableFilter = {
+  organization: "All",
+  username: "",
+  email: "",
+  date: "",
+  phoneNumber: "",
+  status: null,
+};
+
+export default function useTableFilter(): TableFilterContextType {
+  const [state, setState] = useState<TableFilter>(tableInitialState);
   
+  return {
+    resetState() {
+      setState(tableInitialState);
+    },
+    setState,
+    state,
+  };
 }

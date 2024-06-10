@@ -1,20 +1,35 @@
 import { formatDate } from "@/utils/functions";
 import { UserResponse } from "../response/user";
 
-export interface User extends Omit<UserResponse, "maritalstatus"> {
+export interface User extends Omit<UserResponse, "maritalstatus" | "status"> {
   status: UserStatus;
   maritalstatus: string;
 }
 
 export enum UserStatus {
-  active,
-  inactive,
-  blacklisted,
-  pending,
+  active = "Active",
+  inactive = "Inactive",
+  blacklisted = "Blacklisted",
+  pending = "Pending",
 }
 
-export function userResponseToDomain(users: UserResponse[]): User[] {
-    //arbitrary mapper of UserResponse to User Domain Object
+export function stringToUserStatus(val: string): UserStatus | null {
+  switch (val) {
+    case "Active":
+      return UserStatus.active;
+    case "Inactive":
+      return UserStatus.inactive;
+    case "Blacklisted":
+      return UserStatus.blacklisted;
+    case "Pending":
+      return UserStatus.pending;
+    default:
+      return null;
+  }
+}
+
+export function usersResponseToDomain(users: UserResponse[]): User[] {
+  //arbitrary mapper of UserResponse to User Domain Object
   return users.map((item) => ({
     ...item,
     phone_number: item.phone_number.substring(0, 12),

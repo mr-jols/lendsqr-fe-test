@@ -4,9 +4,7 @@ import useUsers, { UsersContext } from "@/hooks/useUsers";
 import "@mantine/core/styles.css";
 import useForm, { FormElementType } from "@/hooks/useForm";
 import { FilterFormContext } from "@/context/useFormFilter";
-import useGlobalFilter, {
-  GlobalFilterContext,
-} from "@/context/useGlobalFilter";
+import useTableFilter, { TableFilterContext } from "@/hooks/useTableFilter";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   //used to manage state of users on the dashboard
@@ -27,17 +25,17 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       type: FormElementType.text,
     })),
   ]);
-  //used to manage filter state
-  const globalFilterState = useGlobalFilter();
+  //used to manage table filter state
+  const tableFilterState = useTableFilter();
 
   return (
     <UsersContext.Provider
       value={{ users, blacklistUser, activateUser, saveUsers }}
     >
       <FilterFormContext.Provider value={formState}>
-        <GlobalFilterContext.Provider value={globalFilterState}>
+        <TableFilterContext.Provider value={tableFilterState}>
           <MantineProvider>{children}</MantineProvider>
-        </GlobalFilterContext.Provider>
+        </TableFilterContext.Provider>
       </FilterFormContext.Provider>
     </UsersContext.Provider>
   );
