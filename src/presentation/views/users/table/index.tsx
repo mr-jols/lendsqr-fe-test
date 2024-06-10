@@ -9,8 +9,6 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useContext, useMemo, useState } from "react";
-import Images from "@/utils/images";
-import Image from "next/image";
 import {
   ActiveChipBuilder,
   BlacklistedChipBuilder,
@@ -26,6 +24,8 @@ import {
   TableFilterContextType,
   tableInitialState,
 } from "@/hooks/useTableFilter";
+import { isStringContained } from "@/utils/functions";
+import Paginator from "./paginator";
 
 interface UserTableProps {
   organization: string;
@@ -101,11 +101,11 @@ export default function UsersTable() {
           if (
             (item.organization == filterState.organization ||
               filterState.organization == tableInitialState.organization) &&
-            (item.username.toLowerCase().includes(filterState.username.toLowerCase()) ||
+            (isStringContained(item.fullname, filterState.username) ||
               filterState.username == tableInitialState.username) &&
-            (item.email == filterState.email ||
+            (isStringContained(item.email, filterState.email) ||
               filterState.email == tableInitialState.email) &&
-            (item.phone_number == filterState.phoneNumber ||
+            (isStringContained(item.phone_number, filterState.phoneNumber) ||
               filterState.phoneNumber == tableInitialState.phoneNumber) &&
             (item.date_joined == filterState.date ||
               filterState.date == tableInitialState.date) &&
@@ -198,57 +198,18 @@ export default function UsersTable() {
           <span>out of {users.length}</span>
         </div>
 
-        <div className="paginate">
-          <button
-            className={`image-wrapper ${
-              !table.getCanPreviousPage() ? "inactive" : ""
-            }`}
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            <Image src={Images.table.previous} alt="previous" />
-          </button>
-          {ellipses(
-            table.getPageCount(),
-            table.getState().pagination.pageIndex
-          ).map((item, index) => (
-            <div
-              key={index}
-              onClick={() => {
-                if (item !== "...") table.setPageIndex(item - 1);
-              }}
-              className={`visible-cells ${
-                table.getState().pagination.pageIndex + 1 == item
-                  ? "active"
-                  : "inactive"
-              }`}
-            >
-              {item}
-            </div>
-          ))}
-
-          <button
-            className={`image-wrapper ${
-              !table.getCanNextPage() ? "inactive" : ""
-            }`}
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            <Image src={Images.table.next} alt="next" />
-          </button>
-        </div>
+        <Paginator
+          props={{
+            currentIndex: table.getState().pagination.pageIndex + 1,
+            lastIndex: table.getPageCount(),
+            isLeftButtonEnabled: table.getCanPreviousPage(),
+            isRightButtonEnabled: table.getCanNextPage(),
+            onLeftButtonClick: () => table.previousPage(),
+            onRightButtonClick: () => table.nextPage(),
+            onPaginatorItemClick: (item) => table.setPageIndex(item - 1),
+          }}
+        />
       </div>
     </div>
   );
-}
-
-function ellipses(input: number, state: number): any[] {
-  const array =
-    input - 2 <= state + 3
-      ? ["...", input - 4, input - 3, input - 2, input - 1, input]
-      : [1 + state, 2 + state, 3 + state, "...", input - 1, input];
-  return array.filter((item, index) => {
-    if (item === "...") return true;
-    return (item as number) > 0;
-  });
 }

@@ -135,7 +135,7 @@ export default function HeadingFilters({
                     index: 4,
                     value: e,
                   }),
-                type: FormElementType.number,
+                type: FormElementType.text,
                 value: state.values[4],
               }}
             />
