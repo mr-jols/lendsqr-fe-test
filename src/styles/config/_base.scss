@@ -4,7 +4,6 @@
 @use "typography" as *;
 @use "sass:color";
 @use "breakpoints" as *;
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap');
 
 
 html {
@@ -22,7 +21,7 @@ html {
   box-sizing: border-box !important;
 }
 body{
-  font-family:'Work Sans', $font-family--Avenir;
+  font-family:$font-family--Sans, $font-family--Avenir;
 }
 a {
   text-decoration: none;

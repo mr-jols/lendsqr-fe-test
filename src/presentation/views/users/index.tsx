@@ -10,6 +10,7 @@ export default function UsersView() {
 
   return (
     <div>
+      <h5 className="dashboard-title">Users</h5>
       <UsersStats />
       {users.length == 0 ? <UsersSkeleton /> : <UsersTable />}
     </div>

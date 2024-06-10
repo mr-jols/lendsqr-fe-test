@@ -52,7 +52,6 @@ export default function UsersStats() {
 
   return (
     <div className="user-stats">
-      <h5 className="dashboard-title">Users</h5>
       <div className="user-stats-cards">
         {userStatsCardsData.map((item, index) => (
           <div key={index}>

@@ -14,5 +14,32 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Work Sans";
+  font-weight: 700;
+  src: url("../../../public/fonts/work_sans_bold.ttf");
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Work Sans";
+  font-weight: 500;
+  src: url("../../../public/fonts/work_sans_medium.ttf");
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Work Sans";
+  font-weight: 400;
+  src: url("../../../public/fonts/work_sans_regular.ttf");
+  font-style: normal;
+  font-display: swap;
+}
+
 $font-family--Avenir: "Avenir", system-ui, -apple-system, "Segoe UI", roboto,
+  ubuntu, cantarell, "Noto Sans", sans-serif;
+
+$font-family--Sans: "Work Sans", system-ui, -apple-system, "Segoe UI", roboto,
   ubuntu, cantarell, "Noto Sans", sans-serif;
