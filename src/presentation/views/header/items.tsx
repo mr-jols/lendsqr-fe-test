@@ -10,6 +10,7 @@ export default function HeaderItems() {
           child: <>Docs</>,
           className: "docs",
           href: "/docs",
+          disablePrefetch: true,
         }}
       />
       <div className="notification-icon-wrapper">

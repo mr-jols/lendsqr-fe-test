@@ -6,6 +6,7 @@ export default function NavItem({ props }: { props: NavItemProps }) {
   return (
     <LinkBuilder
       props={{
+        disablePrefetch:true,
         child: (
           <div>
             <div className="nav-link-icon-wrapper">
