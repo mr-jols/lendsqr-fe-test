@@ -19,7 +19,7 @@ export default function UserDetailsPage({
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    //navigate to dashboard if params is invalid
+    //navigate to dashboard if params is invalid, valid params include values from 1 to 100 since there are 100 stubbed users
     if (
       isNaN(Number(params.id)) ||
       Number(params.id) < 1 ||

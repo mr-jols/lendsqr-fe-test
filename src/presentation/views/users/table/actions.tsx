@@ -32,7 +32,7 @@ export function ActionTooltip({ props }: { props: { index: number } }) {
                   <span>View Detail</span>
                 </>
               ),
-              href: `/dashboard/user/${props.index + 1}`,
+              href: `/dashboard/users/${props.index + 1}`,
               className: "action-tooltip-menu-item",
             }}
           />
