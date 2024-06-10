@@ -85,7 +85,7 @@ const columns = [
   }),
 ];
 
-export default function UserTable() {
+export default function UsersTable() {
   const { users } = useContext(UsersContext) as UsersContextType;
   const [expanded, setExpanded] = useState<ExpandedState>({});
   const { globalFilter, setGlobalFilter } = useContext(
