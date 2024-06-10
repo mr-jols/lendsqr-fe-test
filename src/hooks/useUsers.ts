@@ -3,6 +3,7 @@ import { createContext, useEffect, useState } from "react";
 
 export interface UsersContextType {
   users: User[];
+  isSaved: boolean;
   blacklistUser(id: number): void;
   activateUser(id: number): void;
   saveUsers(users: User[]): void;
@@ -12,6 +13,7 @@ export const UsersContext = createContext<UsersContextType | null>(null);
 
 export default function useUsers(): UsersContextType {
   const [users, setUsers] = useState<User[] | []>([]);
+  const [isSaved, setisSaved] = useState(false);
 
   useEffect(() => {
     //stores users in local storage once updated
@@ -22,6 +24,7 @@ export default function useUsers(): UsersContextType {
 
   function saveUsers(users: User[]) {
     setUsers(users);
+    setisSaved(true);
   }
 
   function blacklistUser(id: number) {
@@ -44,5 +47,5 @@ export default function useUsers(): UsersContextType {
     }
   }
 
-  return { users, saveUsers, blacklistUser, activateUser };
+  return { users, saveUsers, blacklistUser, activateUser, isSaved};
 }

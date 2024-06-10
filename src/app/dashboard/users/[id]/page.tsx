@@ -15,21 +15,22 @@ export default function UserDetailsPage({
 }) {
   const router = useRouter();
   const [toggle, handleToggle] = useToggle();
-  const { users } = useContext(UsersContext) as UsersContextType;
+  const { users, isSaved } = useContext(UsersContext) as UsersContextType;
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    //navigate to dashboard if params is invalid, valid params include values from 1 to 100 since there are 100 stubbed users
+    /*navigate to dashboard if params is invalid, valid params include values from 1 to 100 since there are 100 stubbed users
+    if users are saved in state toggle placeholder and show user details*/
     if (
       isNaN(Number(params.id)) ||
       Number(params.id) < 1 ||
-      Number(params.id) > users.length
+      (Number(params.id) > users.length && isSaved)
     ) {
       router.push("/dashboard/users");
     } else {
-      handleToggle();
+      if (isSaved) handleToggle();
     }
-  }, []);
+  }, [isSaved]);
 
   return !toggle ? (
     <></>

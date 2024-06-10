@@ -38,7 +38,9 @@ describe("it ensures validity of form state", () => {
   });
 
   it("ensures validity of initial State", () => {
-    expect(initialFormState([elements[0],elements[1]])).toEqual(<FormStateProps>{
+    expect(initialFormState([elements[0], elements[1]])).toEqual(<
+      FormStateProps
+    >{
       errors: ["", ""],
       isDirty: [false, false],
       values: ["", ""],
@@ -50,18 +52,22 @@ describe("it ensures validity of form state", () => {
     });
   });
 
-  it("checks that initialState of a form element is set",()=>{
-    expect(initialFormState([{
-       errorMessages:"",
-       index:0,
-       shouldValidate:false,
-       type:FormElementType.text,
-       initialValue:"lendsqr"
-    }]).values).toEqual(["lendsqr"]);
-  })
+  it("checks that initialState of a form element is set", () => {
+    expect(
+      initialFormState([
+        {
+          errorMessages: "",
+          index: 0,
+          shouldValidate: false,
+          type: FormElementType.text,
+          initialValue: "lendsqr",
+        },
+      ]).values
+    ).toEqual(["lendsqr"]);
+  });
 
   it("updates form value", () => {
-    const state = initialFormState([elements[0],elements[1]]);
+    const state = initialFormState([elements[0], elements[1]]);
     expect(updateValue(state, { index: 0, value: "updated" }).values).toEqual([
       "updated",
       "",
@@ -69,7 +75,7 @@ describe("it ensures validity of form state", () => {
   });
 
   it("updates form errors", () => {
-    const state = initialFormState([elements[0],elements[1]]);
+    const state = initialFormState([elements[0], elements[1]]);
     const errorMessage = "Something went wrong";
     expect(
       updateErrors(state, { index: 0, value: errorMessage }).errors
@@ -77,7 +83,7 @@ describe("it ensures validity of form state", () => {
   });
 
   it("updates form is dirty Fields", () => {
-    const state = initialFormState([elements[0],elements[1]]);
+    const state = initialFormState([elements[0], elements[1]]);
     expect(updateIsDirty(state, { index: 0, value: true }).isDirty).toEqual([
       true,
       false,

@@ -8,7 +8,7 @@ import useTableFilter, { TableFilterContext } from "@/hooks/useTableFilter";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   //used to manage state of users on the dashboard
-  const { users, blacklistUser, activateUser, saveUsers } = useUsers();
+  const usersState = useUsers();
   //used to manage state the filter form on the dashboard
   const formState = useForm([
     {
@@ -29,9 +29,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   const tableFilterState = useTableFilter();
 
   return (
-    <UsersContext.Provider
-      value={{ users, blacklistUser, activateUser, saveUsers }}
-    >
+    <UsersContext.Provider value={usersState}>
       <FilterFormContext.Provider value={formState}>
         <TableFilterContext.Provider value={tableFilterState}>
           <MantineProvider>{children}</MantineProvider>
