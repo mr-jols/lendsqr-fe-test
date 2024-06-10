@@ -3,15 +3,16 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 import useToggle from "@/hooks/useToggle";
 import { Drawer } from "@mantine/core";
 import { useEffect } from "react";
-import Nav from "../nav";
+import NavView from "../nav";
 import HamburgerMenu from "./hamburger";
 import Logo from "./logo";
 import HeaderItems from "./items";
 
-export default function Header() {
+export default function HeaderView() {
   const [toggle, handleToggle] = useToggle();
   const matches = useMediaQuery("(min-width: 1025px)");
 
+  //ensures the drawer is always closed on bigger screens
   useEffect(() => {
     if (matches && toggle) handleToggle();
   }, [toggle, matches]);
@@ -40,7 +41,7 @@ export default function Header() {
             body: { padding: 0 },
           }}
         >
-          <Nav />
+          <NavView />
         </Drawer>
       </div>
     </header>

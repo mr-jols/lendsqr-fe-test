@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
-import Header from "../../presentation/views/header";
-import Nav from "../../presentation/views/nav";
+import HeaderView from "../../presentation/views/header";
+import NavView from "../../presentation/views/nav";
 import { useRouter } from "next/navigation";
 import useToggle from "@/hooks/useToggle";
 
@@ -13,7 +13,10 @@ export default function DashboardLayout({
   const router = useRouter();
   const [toggle, handleToggle] = useToggle();
 
-  //Auth Context
+  /* A  blank screen is initially shown, 
+  if the user is authenticated the blank screen is toggled to the dashboard screen, 
+  if they are unauthenticated they are redirected to login*/
+
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
     if (!isLoggedIn) {
@@ -27,10 +30,10 @@ export default function DashboardLayout({
     <> </>
   ) : (
     <div className="dashboard">
-      <Header />
+      <HeaderView />
       <div className="dashboard-content-wrapper">
         <div className="nav-wrapper">
-          <Nav />
+          <NavView />
         </div>
         <main>{children}</main>
       </div>

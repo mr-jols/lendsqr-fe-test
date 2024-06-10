@@ -1,8 +1,8 @@
 "use client";
-import UserDetailBackButton from "./view/back_button";
-import UserDetailIntroSection from "./view/intro_section";
-import UserDetailBodySection from "./view/body_section";
-import UserDetailHeaderWithActions from "./view/header";
+import UserDetailBackButton from "../../../../presentation/views/user/back_button";
+import UserDetailIntroSection from "../../../../presentation/views/user/intro_section";
+import UserDetailBodySection from "../../../../presentation/views/user/body_section";
+import UserDetailHeaderWithActions from "../../../../presentation/views/user/header";
 import { useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import useToggle from "@/hooks/useToggle";

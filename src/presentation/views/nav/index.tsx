@@ -18,7 +18,7 @@ export interface NavItemProps {
   isProminent?: boolean;
 }
 
-export default function Nav() {
+export default function NavView() {
   return (
     <nav className="nav">
       <div className="nav-section">
