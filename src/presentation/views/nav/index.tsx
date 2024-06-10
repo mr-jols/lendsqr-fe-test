@@ -1,17 +1,16 @@
-"use client";
-import LinkBuilder from "@/presentation/components/link";
 import Images from "@/utils/images";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
 import dashboardLinksData from "./data";
+import NavItem from "./item";
 
-export interface NavLinksProps {
-  customers: LinkItem[];
-  business: LinkItem[];
-  settings: LinkItem[];
+export interface NavProps {
+  customers: NavItemProps[];
+  business: NavItemProps[];
+  settings: NavItemProps[];
 }
 
-interface LinkItem {
+export interface NavItemProps {
   icon: StaticImport;
   title: string;
   href?: string;
@@ -37,7 +36,7 @@ export default function Nav() {
       </div>
 
       <div className="nav-section nav-section--smallest-margin">
-        <NavLinkItem
+        <NavItem
           props={{
             icon: Images.sidenav.dashboard,
             title: "Dashboard",
@@ -51,7 +50,7 @@ export default function Nav() {
         <ul>
           {dashboardLinksData.customers.map((item, index) => (
             <li key={index}>
-              <NavLinkItem props={item} />
+              <NavItem props={item} />
             </li>
           ))}
         </ul>
@@ -62,7 +61,7 @@ export default function Nav() {
         <ul>
           {dashboardLinksData.business.map((item, index) => (
             <li key={index}>
-              <NavLinkItem props={item} />
+              <NavItem props={item} />
             </li>
           ))}
         </ul>
@@ -73,14 +72,14 @@ export default function Nav() {
         <ul>
           {dashboardLinksData.settings.map((item, index) => (
             <li key={index}>
-              <NavLinkItem props={item} />
+              <NavItem props={item} />
             </li>
           ))}
         </ul>
       </div>
 
       <div className="nav-section nav-section--with-divider">
-        <NavLinkItem
+        <NavItem
           props={{
             icon: Images.sidenav.logout,
             title: "Logout",
@@ -94,30 +93,5 @@ export default function Nav() {
         <span>v1.2.0</span>
       </div>
     </nav>
-  );
-}
-
-function NavLinkItem({ props }: { props: LinkItem }) {
-  return (
-    <LinkBuilder
-      props={{
-        child: (
-          <div>
-            <div className="nav-link-icon-wrapper">
-              <Image src={props.icon} alt="icon" />
-            </div>
-            <p>{props.title}</p>
-          </div>
-        ),
-        className: `nav-link ${
-          props.isActive
-            ? "nav-link--active"
-            : props.isProminent
-            ? "nav-link--prominent"
-            : ""
-        }`,
-        href: props.href,
-      }}
-    />
   );
 }

@@ -1,12 +1,11 @@
-"use client";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export function useQuery<T>(url: string): [T | null, boolean, string | null] {
     const [data, setData] = useState<T | null>(null);
     const [isLoading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
   
-    useLayoutEffect(() => {
+    useEffect(() => {
       const fetchData = async () => {
         try {
           const response = await fetch(url);

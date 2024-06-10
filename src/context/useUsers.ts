@@ -1,4 +1,3 @@
-"use client";
 import { UserResponse } from "@/models/response/user";
 import { createContext, useEffect, useState } from "react";
 

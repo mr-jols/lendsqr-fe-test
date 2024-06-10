@@ -1,7 +1,7 @@
 import Images from "@/utils/images";
-import { NavLinksProps } from ".";
+import { NavProps } from ".";
 
-const dashboardLinksData: NavLinksProps = {
+export default <NavProps>{
   customers: [
     {
       title: "Users",
@@ -115,5 +115,3 @@ const dashboardLinksData: NavLinksProps = {
     },
   ],
 };
-
-export default dashboardLinksData;

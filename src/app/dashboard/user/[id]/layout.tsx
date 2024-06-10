@@ -1,7 +1,7 @@
 "use client";
 import { UsersContext, UsersContextType } from "@/context/useUsers";
 import { useRouter } from "next/navigation";
-import { useContext, useEffect, useLayoutEffect } from "react";
+import { useContext, useEffect} from "react";
 
 export default function UserDetailLayout({
   children,

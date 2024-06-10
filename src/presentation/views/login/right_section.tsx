@@ -25,7 +25,7 @@ function LoginForm() {
   const elements: FormElementConfigProps[] = [
     {
       type: FormElementType.email,
-      errorMessages: ["Your Email is Requried", "Please enter a valid email"],
+      errorMessages: ["Your Email is required", "Please enter a valid email"],
       shouldValidate: true,
       index: 0,
     },
@@ -42,13 +42,15 @@ function LoginForm() {
   useEffect(() => {
     if (state.sumbitButtonState.isLoading) {
       //mock api load time
-      setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         localStorage.setItem("isLoggedIn", "true");
         router.push("/dashboard/users");
         dispatch.handleButtonStateChange({
           ...state.sumbitButtonState,
         });
       }, 1000);
+
+      return () => clearTimeout(timeoutId);
     }
   }, [state.sumbitButtonState.isLoading]);
 

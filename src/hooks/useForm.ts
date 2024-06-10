@@ -1,4 +1,3 @@
-"use client";
 import { useState } from "react";
 
 //This custom hook manages form state

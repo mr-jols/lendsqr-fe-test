@@ -1,6 +1,6 @@
 @use "../config" as *;
 
-.login-wrapper {
+.login {
   min-height: 100vh;
   display: flex;
 
@@ -56,7 +56,7 @@
       & > div {
         width: 100%;
 
-        @include breakpoint-tab-small {
+        @include breakpoint-tab {
           width: unset;
           max-width: 80%;
         }

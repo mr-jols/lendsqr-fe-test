@@ -1,7 +1,7 @@
 "use client";
-import { useLayoutEffect } from "react";
-import Header from "./view/header";
-import Nav from "./view/nav";
+import { useEffect } from "react";
+import Header from "../../presentation/views/header";
+import Nav from "../../presentation/views/nav";
 import { useRouter } from "next/navigation";
 import useToggle from "@/hooks/useToggle";
 
@@ -14,7 +14,7 @@ export default function DashboardLayout({
   const [toggle, handleToggle] = useToggle();
 
   //Auth Context
-  useLayoutEffect(() => {
+  useEffect(() => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
     if (!isLoggedIn) {
       router.push("/login");

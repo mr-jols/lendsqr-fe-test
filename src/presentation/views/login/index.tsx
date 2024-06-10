@@ -6,7 +6,7 @@ import RightSection from "./right_section";
 export default function LoginView() {
   return (
     <main>
-      <div className="login-wrapper">
+      <div className="login">
         <div className="positioned-wrapper">
           <div className="logo-icon-wrapper">
             <Image

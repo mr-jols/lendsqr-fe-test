@@ -1,4 +1,3 @@
-"use client";
 import useToggle from "@/hooks/useToggle";
 import { InputFieldProps } from ".";
 import ErrorBuilder from "./error";

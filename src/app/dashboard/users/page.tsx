@@ -3,9 +3,9 @@ import { UsersContext, UsersContextType } from "@/context/useUsers";
 import { useQuery } from "@/hooks/useQuery";
 import { UsersResponse, toDomain } from "@/models/response/user";
 import { BASE_URL } from "@/utils/constansts";
-import UserTable from "./views/table";
-import { useContext, useEffect, useLayoutEffect } from "react";
-import UserStats from "./views/stats";
+import UserTable from "../../../presentation/views/users/table";
+import { useContext, useEffect,} from "react";
+import UserStats from "../../../presentation/views/users/stats";
 import useToggle from "@/hooks/useToggle";
 import { Skeleton } from "@mantine/core";
 
@@ -17,7 +17,7 @@ export default function UsersPage() {
     window.scrollTo(0, 0);
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const storedData = localStorage.getItem("users");
     if (storedData) {
       saveUsers(JSON.parse(storedData));

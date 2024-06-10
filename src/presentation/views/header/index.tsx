@@ -1,4 +1,3 @@
-"use client";
 import SearchInputFieldBuilder from "@/presentation/components/input/search";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import useToggle from "@/hooks/useToggle";
@@ -23,25 +22,25 @@ export default function Header() {
         <SearchInputFieldBuilder />
       </div>
       <div>
-      <HeaderItems />
-      <HamburgerMenu
-        props={{
-          isOpen: toggle,
-          onClick: handleToggle,
-        }}
-      />
-      <Drawer
-        opened={toggle}
-        onClose={handleToggle}
-        withCloseButton={false}
-        position="left"
-        size="290px"
-        styles={{
-          body: { padding: 0 },
-        }}
-      >
-        <Nav />
-      </Drawer>
+        <HeaderItems />
+        <HamburgerMenu
+          props={{
+            isOpen: toggle,
+            onClick: handleToggle,
+          }}
+        />
+        <Drawer
+          opened={toggle}
+          onClose={handleToggle}
+          withCloseButton={false}
+          position="left"
+          size="290px"
+          styles={{
+            body: { padding: 0 },
+          }}
+        >
+          <Nav />
+        </Drawer>
       </div>
     </header>
   );
@@ -57,9 +56,7 @@ function HamburgerMenu({
       <div className="hamburger-wrapper">
         <Image
           src={
-            props.isOpen
-              ? Images.header.menu_close
-              : Images.header.menu_open
+            props.isOpen ? Images.header.menu_close : Images.header.menu_open
           }
           alt={props.isOpen ? "menu_close_icon" : "menu_open_icon"}
         />

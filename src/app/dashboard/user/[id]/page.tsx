@@ -3,7 +3,7 @@ import UserDetailBackButton from "./view/back_button";
 import UserDetailIntroSection from "./view/intro_section";
 import UserDetailBodySection from "./view/body_section";
 import UserDetailHeaderWithActions from "./view/header";
-import { useContext, useLayoutEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import useToggle from "@/hooks/useToggle";
 import { UsersContext, UsersContextType } from "@/context/useUsers";
@@ -17,7 +17,7 @@ export default function UserDetailsPage({
   const [toggle, handleToggle] = useToggle();
   const { users } = useContext(UsersContext) as UsersContextType;
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     window.scrollTo(0, 0);
     //navigate to dashboard if params is invalid
     if (
