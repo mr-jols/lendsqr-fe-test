@@ -7,6 +7,7 @@ interface FeedbackButtonProps {
   className: string;
   onClick(): void;
   title: string;
+  isDisabled: boolean;
 }
 
 export default function FeedbackButtonBuilder({
@@ -32,9 +33,12 @@ export default function FeedbackButtonBuilder({
         <Box>
           <button
             className={props.className}
+            style={props.isDisabled ? { opacity: "0.3" } : {}}
             onClick={() => {
-              handleToggle();
-              props.onClick();
+              if (!props.isDisabled) {
+                handleToggle();
+                props.onClick();
+              }
             }}
           >
             {props.title}

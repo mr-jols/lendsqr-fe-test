@@ -1,4 +1,5 @@
 import { UsersContext, UsersContextType } from "@/hooks/useUsers";
+import { UserStatus } from "@/models/domain/user";
 import FeedbackButtonBuilder from "@/presentation/components/button";
 import { useContext } from "react";
 
@@ -7,7 +8,7 @@ export default function UserDetailHeaderWithActions({
 }: {
   props: { id: number };
 }) {
-  const { blacklistUser, activateUser } = useContext(
+  const { blacklistUser, activateUser,users } = useContext(
     UsersContext
   ) as UsersContextType;
   return (
@@ -17,11 +18,12 @@ export default function UserDetailHeaderWithActions({
       <div className="user-details-actions">
         <FeedbackButtonBuilder
           props={{
+            isDisabled:users[props.id].status==UserStatus.blacklisted,
             className:
               "user-details-actions-button user-details-actions-button--blacklist",
             feedback: "Blacklisted !",
             onClick() {
-              blacklistUser(props.id - 1);
+              blacklistUser(props.id);
             },
             title: "Blacklist User",
           }}
@@ -29,11 +31,12 @@ export default function UserDetailHeaderWithActions({
 
         <FeedbackButtonBuilder
           props={{
+            isDisabled:users[props.id].status==UserStatus.active,
             className:
               "user-details-actions-button user-details-actions-button--activate",
             feedback: "Activated !",
             onClick() {
-              activateUser(props.id - 1);
+              activateUser(props.id);
             },
             title: "Activate User",
           }}
