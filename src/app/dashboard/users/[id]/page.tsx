@@ -37,9 +37,9 @@ export default function UserDetailsPage({
   ) : (
     <div className="user-details">
       <UserDetailBackButton />
-      <UserDetailHeaderWithActions props={{ id: Number(params.id) }} />
-      <UserDetailIntroSection props={{ id: Number(params.id) }} />
-      <UserDetailBodySection props={{ id: Number(params.id) }} />
+      <UserDetailHeaderWithActions props={{ id: Number(params.id) -1}} />
+      <UserDetailIntroSection props={{ id: Number(params.id)-1 }} />
+      <UserDetailBodySection props={{ id: Number(params.id)-1 }} />
     </div>
   );
 }
