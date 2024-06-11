@@ -13,7 +13,6 @@ export default function UsersLayout({
   const [toggle, handleToggle] = useToggle();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     // if users data is present in local storage it is saved in state else users are fetched
     const storedData = localStorage.getItem("users");
     if (storedData) {
