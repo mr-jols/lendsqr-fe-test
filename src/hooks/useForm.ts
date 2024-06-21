@@ -111,15 +111,15 @@ export interface FormHookOutputProps {
     handleButtonStateChange(update: SubmitButtonStateProps): void;
     handleValidateFormElement(element: FormElementConfigProps): void;
     handleValidateFormElements(elements: FormElementConfigProps[]): void;
+    resetFormState(): void;
   };
 }
 
 export default function useForm(
   init: FormElementConfigProps[]
 ): FormHookOutputProps {
-  const [formState, setFormState] = useState<FormStateProps>(
-    initialFormState(init)
-  );
+  const initialState = initialFormState(init);
+  const [formState, setFormState] = useState<FormStateProps>(initialState);
 
   function handleValueChange(update: UpdateValuesProps) {
     setFormState(updateValue(formState, update));
@@ -141,6 +141,9 @@ export default function useForm(
     setFormState(validateFormElements(formState, elements));
   }
 
+  function resetFormState() {
+    setFormState(initialState);
+  }
   return {
     state: formState,
     dispatch: {
@@ -149,6 +152,7 @@ export default function useForm(
       handleButtonStateChange,
       handleValidateFormElement,
       handleValidateFormElements,
+      resetFormState
     },
   };
 }
@@ -195,7 +199,7 @@ export function validateFormElements(
   const state: FormStateProps = {
     ...currentState,
     errors: currentState.errors.map(
-      (item, index) =>
+      (_, index) =>
         validateFormElement(currentState, elements[index]).errors[index]
     ),
   };
@@ -205,8 +209,7 @@ export function validateFormElements(
     sumbitButtonState: {
       ...state.sumbitButtonState,
       isLoading:
-        state.errors.filter((item, index) => item == "").length ==
-        state.values.length,
+        state.errors.filter((item) => item == "").length == state.values.length,
     },
   };
 }

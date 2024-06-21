@@ -4,6 +4,7 @@ import { UserResponse } from "../response/user";
 export interface User extends Omit<UserResponse, "maritalstatus" | "status"> {
   status: UserStatus;
   maritalstatus: string;
+  index:number
 }
 
 export enum UserStatus {
@@ -30,8 +31,9 @@ export function stringToUserStatus(val: string): UserStatus | null {
 
 export function usersResponseToDomain(users: UserResponse[]): User[] {
   //arbitrary mapper of UserResponse to User Domain Object
-  return users.map((item) => ({
+  return users.map((item,index) => ({
     ...item,
+    index,
     phone_number: item.phone_number.substring(0, 12),
     date_joined: formatDate(item.date_joined),
     maritalstatus: item.maritalstatus ? "Single" : "Married",

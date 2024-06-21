@@ -18,13 +18,11 @@ import {
 import { UsersContext, UsersContextType } from "@/hooks/useUsers";
 import { ActionTooltip } from "./actions";
 import HeadingFilters from "./filters";
-import { UserStatus } from "@/models/domain/user";
+import { User, UserStatus } from "@/models/domain/user";
 import {
   TableFilterContext,
   TableFilterContextType,
-  tableInitialState,
 } from "@/hooks/useTableFilter";
-import { isStringContained } from "@/utils/functions";
 import Paginator from "./paginator";
 
 interface UserTableProps {
@@ -34,7 +32,7 @@ interface UserTableProps {
   phoneNumber: string;
   dateJoined: string;
   status: UserStatus;
-  action: string;
+  action: User[];
 }
 
 const columnHelper = createColumnHelper<UserTableProps>();
@@ -76,55 +74,37 @@ const columns = [
     },
   }),
   columnHelper.accessor("action", {
-    header: "",
     cell(info) {
       return (
         <div>
-          <ActionTooltip props={{ index: info.row.index }} />
+          <ActionTooltip props={{ index: info.getValue()[info.row.index ].index }} />
         </div>
       );
     },
   }),
 ];
 
+
 export default function UsersTable() {
   const { users } = useContext(UsersContext) as UsersContextType;
   const [expanded, setExpanded] = useState<ExpandedState>({});
-  const { state: filterState } = useContext(
+  const { state: filterState, filterUsers } = useContext(
     TableFilterContext
   ) as TableFilterContextType;
 
+  const filteredUsers=filterUsers(users);
+
   const data = useMemo(
     () => [
-      ...users
-        .filter((item) => {
-          if (
-            (item.organization == filterState.organization ||
-              filterState.organization == tableInitialState.organization) &&
-            (isStringContained(item.fullname, filterState.username) ||
-              filterState.username == tableInitialState.username) &&
-            (isStringContained(item.email, filterState.email) ||
-              filterState.email == tableInitialState.email) &&
-            (isStringContained(item.phone_number, filterState.phoneNumber) ||
-              filterState.phoneNumber == tableInitialState.phoneNumber) &&
-            (item.date_joined == filterState.date ||
-              filterState.date == tableInitialState.date) &&
-            (item.status == filterState.status ||
-              filterState.status == tableInitialState.status)
-          )
-            return true;
-
-          return false;
-        })
-        .map((item) => ({
-          organization: item.organization,
-          username: item.fullname,
-          email: item.email,
-          phoneNumber: item.phone_number,
-          dateJoined: item.date_joined,
-          status: item.status,
-          action: "",
-        })),
+      ...filteredUsers.map((item) => ({
+        organization: item.organization,
+        username: item.fullname,
+        email: item.email,
+        phoneNumber: item.phone_number,
+        dateJoined: item.date_joined,
+        status: item.status,
+        action: filteredUsers,
+      })),
     ],
     [users, filterState]
   );

@@ -159,7 +159,10 @@ export default function HeadingFilters({
             <div className="buttons">
               <button
                 className="submit-button submit-button--outlined"
-                onClick={() => resetState()}
+                onClick={() => {
+                  resetState();
+                  dispatch.resetFormState();
+                }}
               >
                 Reset
               </button>
