@@ -31,6 +31,7 @@ export default function LoginForm() {
     if (state.sumbitButtonState.isLoading) {
       //mock api load time
       const timeoutId = setTimeout(() => {
+        localStorage.clear();
         localStorage.setItem("isLoggedIn", "true");
         localStorage.setItem("loggedInUser", state.values[0]);
         router.push("/dashboard/users");
